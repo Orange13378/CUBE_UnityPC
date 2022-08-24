@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47222897a906df4f87f1f02fc026303, type: 3}
+  m_Name: KeyBlack
+  m_EditorClassIdentifier: 
+  name: "\u0427\u0435\u0440\u043D\u044B\u0439 \u043A\u043B\u044E\u0447"
+  icon: {fileID: 5100324557583193568, guid: 8afefe7c00cd3d24e82a86a0db9b7555, type: 3}
+  id: 9
+  showInInventory: 1
+  text: "\u042D\u0442\u043E \u0427\u0435\u0440\u043D\u044B\u0439 \u043A\u043B\u044E\u0447"

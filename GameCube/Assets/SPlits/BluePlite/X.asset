@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544eea32e4ede054da02cef1f1b5e27d, type: 3}
+  m_Name: X
+  m_EditorClassIdentifier: 
+  name: New Plite
+  icon: {fileID: -943544008317097151, guid: 9d207b476a3f99c4aad37755359cee34, type: 3}
+  newIcon: {fileID: -5689161497324109295, guid: 6fe30c623bc52e54b9cf9974576f7552, type: 3}
+  electroIcon: {fileID: 526045072524639447, guid: 86c12594a01ede2489596a701bc03ab8, type: 3}
+  id: 10

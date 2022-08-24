@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: 300c07a81233d2646947083b42953acf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - pedestalUI6: {instanceID: 0}
+  - pedestalUI5: {instanceID: 0}
+  - pedestalUI4: {instanceID: 0}
+  - pedestalUI3: {instanceID: 0}
+  - pedestalUI2: {instanceID: 0}
+  - player: {instanceID: 0}
+  - footStep: {instanceID: 0}
+  - whiteWorld: {instanceID: 0}
+  - blueWorld: {instanceID: 0}
+  - orangeWorld: {instanceID: 0}
+  - purpleWorld: {instanceID: 0}
+  - greenWorld: {instanceID: 0}
+  - blackWorld: {instanceID: 0}
+  - sprite_White: {fileID: -8452458359239601253, guid: f0f64b72d3be7624ba81ee451502899b, type: 3}
+  - sprite_Black: {fileID: 5391833508330091455, guid: f0f64b72d3be7624ba81ee451502899b, type: 3}
+  - sprite_Blue: {fileID: 4204057629544484612, guid: f0f64b72d3be7624ba81ee451502899b, type: 3}
+  - sprite_Green: {fileID: 5782448266362187380, guid: f0f64b72d3be7624ba81ee451502899b, type: 3}
+  - sprite_Orange: {fileID: 5919530375073675268, guid: f0f64b72d3be7624ba81ee451502899b, type: 3}
+  - sprite_Purple: {fileID: 268764747275432381, guid: f0f64b72d3be7624ba81ee451502899b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
