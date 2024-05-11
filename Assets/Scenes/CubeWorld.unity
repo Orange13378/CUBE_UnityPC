@@ -1227,7 +1227,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8557490233044110439, guid: 4fce1f571066b06438ac075727c17ac0, type: 3}
       propertyPath: m_Volume
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8557490233928522244, guid: 4fce1f571066b06438ac075727c17ac0, type: 3}
       propertyPath: m_Name
@@ -1335,7 +1335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8557490233928522246, guid: 4fce1f571066b06438ac075727c17ac0, type: 3}
       propertyPath: m_Volume
-      value: 0.15
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8557490233928522246, guid: 4fce1f571066b06438ac075727c17ac0, type: 3}
       propertyPath: m_audioClip
@@ -3491,7 +3491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &226908987
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11542,6 +11542,7 @@ GameObject:
   - component: {fileID: 710054656}
   - component: {fileID: 710054652}
   - component: {fileID: 710054653}
+  - component: {fileID: 710054657}
   m_Layer: 0
   m_Name: DialogSystem
   m_TagString: Untagged
@@ -11556,7 +11557,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710054651}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac81ad07d83af1545aa532c2fa037fbe, type: 3}
   m_Name: 
@@ -11593,6 +11594,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 760177923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &710054657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710054651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 132de051b974f8e4a8224829eee4f3a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogPanel: {fileID: 226908986}
+  _textSpeed: 0.02
 --- !u!4 &713537582 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7624911873558964162, guid: 81e6f0d12bbdca442a44c6333777b1de, type: 3}
@@ -65666,6 +65681,10 @@ PrefabInstance:
       propertyPath: m_SpriteSortPoint
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8041374799114278283, guid: b735448500613f84eb0d75c35955cc28, type: 3}
+      propertyPath: m_Volume
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 8274758241833426493, guid: b735448500613f84eb0d75c35955cc28, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -106817,8 +106836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configuration: {fileID: 11400000, guid: 2d71a6405af71cf418414204566e8cb7, type: 2}
-  coinCounter: {fileID: 0}
-  playerWonPanel: {fileID: 156687903}
+  dialogPanel: {fileID: 226908986}
   footStepsAudioClips:
   - {fileID: 8300000, guid: 22cb285eaaba35e4cacdd695a40360ca, type: 3}
   - {fileID: 8300000, guid: ce94934489d9f1941886f4b8124a3b2e, type: 3}
@@ -106846,6 +106864,10 @@ MonoBehaviour:
   - {fileID: 252076959}
   - {fileID: 1717356652}
   - {fileID: 1388482514}
+  chestInteract: {fileID: 2038834555}
+  inventoryView: {fileID: 2092741095}
+  itemInteract: {fileID: 1729287621}
+  dialogSystem: {fileID: 710054657}
 --- !u!4 &2034473490
 Transform:
   m_ObjectHideFlags: 0
@@ -106878,7 +106900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1771a0d3e3d5e747bf310121fa9288a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestItem: {fileID: 11400000, guid: a74e0ba99afa31847ab1c76d2c5b87c2, type: 2}
+  chestItem: {fileID: 11400000, guid: f1d57a38593ea4745b4c65b60d77b166, type: 2}
 --- !u!1 &2043540634
 GameObject:
   m_ObjectHideFlags: 0
