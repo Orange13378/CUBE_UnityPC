@@ -1,26 +1,19 @@
 using CubeECS;
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 using UnityEngine;
 
-public class PlayerAnimationSystem : IEcsInitSystem, IEcsRunSystem
+public class PlayerAnimationSystem : IEcsRunSystem
 {
-    private EcsFilter _filter;
-    private EcsPool<PlayerInputComponent> _playerInputPool;
-    private EcsPool<PlayerComponent> _playerPool;
-
-    public void Init(IEcsSystems systems)
-    {
-        _filter = systems.GetWorld().Filter<PlayerInputComponent>().Inc<PlayerComponent>().End();
-
-        _playerInputPool = systems.GetWorld().GetPool<PlayerInputComponent>();
-        _playerPool = systems.GetWorld().GetPool<PlayerComponent>();
-    }
+    private EcsFilterInject<Inc<PlayerInputComponent, PlayerComponent>> _filters;
+    private EcsPoolInject<PlayerInputComponent> _playerInputPool;
+    private EcsPoolInject<PlayerComponent> _playerPool;
 
     public void Run(IEcsSystems systems)
     {
-        foreach (var entity in _filter)
+        foreach (var entity in _filters.Value)
         {
-            ref var playerComponent = ref _playerPool.Get(entity);
+            ref var playerComponent = ref _playerPool.Value.Get(entity);
 
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -30,7 +23,7 @@ public class PlayerAnimationSystem : IEcsInitSystem, IEcsRunSystem
             if (!playerComponent.IsPlayerActive)
                 return;
 
-            ref var playerInputComponent = ref _playerInputPool.Get(entity);
+            ref var playerInputComponent = ref _playerInputPool.Value.Get(entity);
             playerComponent.PlayerAnimator.SetFloat("Horizontal", playerInputComponent.MoveInput.x);
             playerComponent.PlayerAnimator.SetFloat("Vertical", playerInputComponent.MoveInput.y);
             playerComponent.PlayerAnimator.SetFloat("Speed", playerInputComponent.MoveInput.sqrMagnitude);

@@ -1,17 +1,20 @@
 using Leopotam.EcsLite;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace CubeECS
 {
-    public class InventoryUI : MonoBehaviour
+    public class InventoryView : MonoBehaviour
     {
         private EcsWorld _ecsWorld;
         private InventoryComponent _inventory;
 
+        public void Construct(EcsWorld world)
+        {
+            _ecsWorld = world;
+        }
+
         private void Start()
         {
-            _ecsWorld = EcsWorldManager.GetEcsWorld();
             var filter = _ecsWorld.Filter<InventoryComponent>().End();
             var inventoryPool = _ecsWorld.GetPool<InventoryComponent>();
 

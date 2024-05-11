@@ -1,26 +1,28 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 using UnityEngine;
 
 namespace CubeECS
 {
     public class PlayerInitSystem : IEcsInitSystem
     {
+        private EcsWorldInject _world;
+        private EcsPoolInject<PlayerComponent> _playerPool;
+        private EcsPoolInject<PlayerInputComponent> _playerInputPool;
+        private EcsCustomInject<GameData> _gameData;
+
         public void Init(IEcsSystems systems)
         {
-            var ecsWorld = systems.GetWorld();
-            var gameData = systems.GetShared<GameData>();
+            var playerEntity = _world.Value.NewEntity();
 
-            var playerEntity = ecsWorld.NewEntity();
 
-            var playerPool = ecsWorld.GetPool<PlayerComponent>();
-            playerPool.Add(playerEntity);
-            ref var playerComponent = ref playerPool.Get(playerEntity);
-            var playerInputPool = ecsWorld.GetPool<PlayerInputComponent>();
-            playerInputPool.Add(playerEntity);
+            _playerPool.Value.Add(playerEntity);
+            ref var playerComponent = ref _playerPool.Value.Get(playerEntity);
+            _playerInputPool.Value.Add(playerEntity);
 
             var playerGO = GameObject.FindGameObjectWithTag("Player");
             playerComponent.IsPlayerActive = true;
-            playerComponent.PlayerSpeed = gameData.Configuration.PlayerSpeed;
+            playerComponent.PlayerSpeed = _gameData.Value.Configuration.PlayerSpeed;
             playerComponent.PlayerTransform = playerGO.transform;
             playerComponent.PlayerCollider = playerGO.GetComponent<BoxCollider2D>();
             playerComponent.PlayerRB = playerGO.GetComponent<Rigidbody2D>();

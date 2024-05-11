@@ -9,9 +9,9 @@ namespace CubeECS
 
         private EcsWorld _ecsWorld;
 
-        private void Start()
+        public void Construct(EcsWorld world)
         {
-            _ecsWorld = EcsWorldManager.GetEcsWorld();
+            _ecsWorld = world;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -20,7 +20,6 @@ namespace CubeECS
             {
                 var filter = _ecsWorld.Filter<InventoryComponent>().End();
                 var inventoryPool = _ecsWorld.GetPool<InventoryComponent>();
-
                 foreach (var entity in filter)
                 {
                     ref var inventoryComponent = ref inventoryPool.Get(entity);

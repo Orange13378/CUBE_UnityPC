@@ -9,5 +9,7 @@ namespace CubeECS
         public delegate void OnItemChanged();
 
         public OnItemChanged OnItemChangedCallback;
+        public InventoryView InventoryView;
+        public ItemInteract ItemInteract;
     }
 }

@@ -4,6 +4,8 @@ namespace CubeECS
 {
     public struct ChestComponent
     {
+        public ChestInteract ChestInteract;
+
         public List<ChestItem> Items;
 
         public delegate void OnItemInteracted();

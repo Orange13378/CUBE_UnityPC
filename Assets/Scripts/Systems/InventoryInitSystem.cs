@@ -1,27 +1,30 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 
 namespace CubeECS
 {
     public class InventoryInitSystem : IEcsInitSystem
     {
-        private EcsFilter _filter;
-        private EcsPool<InventoryComponent> _inventoryPool;
+        private EcsWorldInject _world;
+        private EcsPoolInject<InventoryComponent> _inventoryPool;
+        private EcsFilterInject<Inc<InventoryComponent>> _inventoryFilter;
+        private EcsCustomInject<GameData> _gameData;
 
         public void Init(IEcsSystems systems)
         {
-            var ecsWorld = systems.GetWorld();
+            var inventoryEntity = _world.Value.NewEntity();
 
-            var inventoryEntity = ecsWorld.NewEntity();
+            ref var inventoryCmp =  ref _inventoryPool.Value.Add(inventoryEntity);
+            inventoryCmp.InventoryView = _gameData.Value.InventoryView;
+            inventoryCmp.InventoryView.Construct(_world.Value);
 
-            _inventoryPool = ecsWorld.GetPool<InventoryComponent>();
-            _inventoryPool.Add(inventoryEntity);
+            inventoryCmp.ItemInteract = _gameData.Value.ItemInteract;
+            inventoryCmp.ItemInteract.Construct(_world.Value);
 
-            _filter = systems.GetWorld().Filter<InventoryComponent>().End();
-
-            foreach (var entity in _filter)
+            foreach (var entity in _inventoryFilter.Value)
             {
-                ref var inventoryComponent = ref _inventoryPool.Get(entity);
+                ref var inventoryComponent = ref _inventoryPool.Value.Get(entity);
                 inventoryComponent.Items = new List<Item>();
             }
         }

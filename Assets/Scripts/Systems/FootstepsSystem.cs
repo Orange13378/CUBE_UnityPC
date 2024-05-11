@@ -1,29 +1,25 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 using UnityEngine;
 
 namespace CubeECS
 {
     public class FootstepsSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private EcsFilter _filter;
-        private EcsPool<FootstepsComponent> _footstepsPool;
-        private EcsPool<PlayerInputComponent> _playerInputPool;
-        private EcsPool<PlayerComponent> _playerPool;
+        private EcsWorldInject _world;
+        
+        private EcsFilterInject<Inc<PlayerInputComponent, PlayerComponent>> _filters;
+        private EcsPoolInject<FootstepsComponent> _footstepsPool;
+        private EcsPoolInject<PlayerInputComponent> _playerInputPool;
+        private EcsPoolInject<PlayerComponent> _playerPool;
+
         private FootstepsComponent _footstepsComponent;
 
         public void Init(IEcsSystems systems)
         {
-            var ecsWorld = systems.GetWorld();
-            var footstepsEntity = ecsWorld.NewEntity();
-            _filter = systems.GetWorld().Filter<PlayerInputComponent>().Inc<PlayerComponent>().End();
-
-            _footstepsPool = systems.GetWorld().GetPool<FootstepsComponent>();
-            _playerInputPool = systems.GetWorld().GetPool<PlayerInputComponent>();
-            _playerPool = systems.GetWorld().GetPool<PlayerComponent>();
-
-            foreach (var entity in _filter)
+            foreach (var entity in _filters.Value)
             {
-                ref var playerComponent = ref _playerPool.Get(entity);
+                ref var playerComponent = ref _playerPool.Value.Get(entity);
                 _footstepsComponent.AudioSource = playerComponent.PlayerAudioSource;
             }
 
@@ -31,19 +27,20 @@ namespace CubeECS
             _footstepsComponent.FootSteps = gameData.FootStepsAudioClips;
             _footstepsComponent.Timer = 0.1f;
 
-            _footstepsPool.Add(footstepsEntity);
+            var footstepsEntity = _world.Value.NewEntity();
+            _footstepsPool.Value.Add(footstepsEntity);
         }
 
         public void Run(IEcsSystems systems)
         {
-            foreach (var entity in _filter)
+            foreach (var entity in _filters.Value)
             {
-                ref var playerComponent = ref _playerPool.Get(entity);
+                ref var playerComponent = ref _playerPool.Value.Get(entity);
 
                 if (!playerComponent.IsPlayerActive)
                     return;
 
-                ref var playerInputComponent = ref _playerInputPool.Get(entity);
+                ref var playerInputComponent = ref _playerInputPool.Value.Get(entity);
 
                 if (playerInputComponent.MoveInput.x != 0 || playerInputComponent.MoveInput.y != 0)
                 {

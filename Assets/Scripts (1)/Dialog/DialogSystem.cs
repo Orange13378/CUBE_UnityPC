@@ -44,19 +44,6 @@ public class DialogSystem : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player")){
-            panelDialog.SetActive(true);
-            //StartDialog();
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        panelDialog.SetActive(false);
-    }
-
     public IEnumerator StartDialog()
     {
         DisablePlayerScript.off = true;
@@ -68,7 +55,7 @@ public class DialogSystem : MonoBehaviour
                 dialog.text = string.Empty;
                 continue_dialog = false;
 
-                foreach(char c in message[i].ToCharArray())
+                foreach(char c in message[i])
                 {
                     dialog.text += c;
                     yield return new WaitForSeconds(textSpeed);
