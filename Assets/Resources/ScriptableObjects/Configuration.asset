@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97442438903d9d4b8b1838007bf973c, type: 3}
   m_Name: Configuration
   m_EditorClassIdentifier: 
-  PlayerSpeed: 2
+  PlayerSpeed: 5
   CameraFollowSmoothness: 0.8
