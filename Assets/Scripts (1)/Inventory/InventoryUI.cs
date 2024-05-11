@@ -1,45 +1,43 @@
+using Leopotam.EcsLite;
 using UnityEngine;
-using System.Collections.Generic;
-using UnityEngine.UI;
+using static UnityEditor.Progress;
 
-/* This object manages the inventory UI. */
+namespace CubeECS
+{
+    public class InventoryUI : MonoBehaviour
+    {
+        private EcsWorld _ecsWorld;
+        private InventoryComponent _inventory;
 
-public class InventoryUI : MonoBehaviour {
+        private void Start()
+        {
+            _ecsWorld = EcsWorldManager.GetEcsWorld();
+            var filter = _ecsWorld.Filter<InventoryComponent>().End();
+            var inventoryPool = _ecsWorld.GetPool<InventoryComponent>();
 
-	public GameObject inventoryUI;	// The entire UI
-	public Transform itemsParent;	// The parent object of all the items
+            foreach (var entity in filter)
+            {
+                ref var inventoryComponent = ref inventoryPool.Get(entity);
+                _inventory = inventoryComponent;
+                _inventory.OnItemChangedCallback += UpdateUI;
+            }
+        }
 
-	Inventory inventory;	// Our current inventory
+        private void UpdateUI()
+        {
+            InventorySlot[] slots = GetComponentsInChildren<InventorySlot>();
 
-	void Awake()
-	{
-		inventory = Inventory.instance;
-		inventory.onItemChangedCallback += UpdateUI;
-	}
-
-	// Check to see if we should open/close the inventory
-	void Update()
-	{
-	}
-
-	// Update the inventory UI by:
-	//		- Adding items
-	//		- Clearing empty slots
-	// This is called using a delegate on the Inventory.
-	public void UpdateUI()
-	{
-		InventorySlot[] slots = GetComponentsInChildren<InventorySlot>();
-
-		for (int i = 0; i < slots.Length; i++)
-		{
-			if (i < inventory.items.Count)
-			{
-				slots[i].AddItem(inventory.items[i]);
-			}
-			else
-			{
-				slots[i].ClearSlot();
-			}
-		}
-	}
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (i < _inventory.Items.Count)
+                {
+                    slots[i].AddItem(_inventory.Items[i]);
+                }
+                else
+                {
+                    slots[i].ClearSlot();
+                }
+            }
+        }
+    }
 }

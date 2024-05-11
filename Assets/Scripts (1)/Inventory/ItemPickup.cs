@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ItemPickup : Interactable {
+public class ItemPickup : MonoBehaviour {
 
 	public Item item;	// Item to put in the inventory if picked up
 
@@ -8,13 +8,11 @@ public class ItemPickup : Interactable {
 
 	[SerializeField] private GameObject objectUI;
 
-	// When the player interacts with the item
-	public override void Interact()
-	{
-		base.Interact();
 
-		PickUp();
-	}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //PickUp();
+    }
 
 	// Pick up the item
 	void PickUp()

@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Leopotam.EcsLite;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using TMPro;
+using CubeECS;
 
 public class Inventory : MonoBehaviour {
 
@@ -29,15 +28,10 @@ public class Inventory : MonoBehaviour {
 
     [SerializeField] private GameObject chest, chest2, chest3, chest4, chest5, chest6, panelDrop, magnit, stoneBlue, stoneOrange, termo, time, objectUI;
     [SerializeField] private Text itemPicked;
-    [System.NonSerialized] public bool keyPickUp = false, entered_chest = false;
+    [System.NonSerialized] public bool entered_chest;
     private bool used_chest = false, used_chest2 = false, used_chest3 = false, used_chest4 = false, used_chest5 = false, used_chest6 = false;
 
-
-
     public List<Item> items = new List<Item>();
-    [SerializeField] public UnityEvent OnInventoryChange;
-
-    //player.gameObject.GetComponent<Player1>().enabled = true;
 
 
     // Add a new item if enough room
@@ -52,7 +46,7 @@ public class Inventory : MonoBehaviour {
 			items.Add(item);
 
             if (onItemChangedCallback != null)
-			onItemChangedCallback.Invoke();
+			    onItemChangedCallback.Invoke();
             
             StartCoroutine(ItemPickedUp());
 		}
@@ -69,19 +63,6 @@ public class Inventory : MonoBehaviour {
         itemPicked.text =  $"Предмет <color=purple>{items[items.Count - 1].name}</color> был подобран";
         yield return new WaitForSeconds(2.5f);
         panelDrop.SetActive(false);
-    }
-
-    public bool Collected(Item item)
-    {
-        foreach (Item slot in items)
-        {
-            if (slot.id == item.id)
-            {
-                //OnInventoryChange.Invoke();
-                return true;
-            }
-        }
-        return false;
     }
 
     // Remove an item
@@ -267,11 +248,11 @@ public class Inventory : MonoBehaviour {
     {
         if (other.CompareTag("Chest"))
         {
-            entered_chest = true;
+            //entered_chest = true;
         }
     }
 
-     private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Chest")
         {
@@ -279,4 +260,27 @@ public class Inventory : MonoBehaviour {
         }
     }
 
+}
+
+public struct ChestSpriteComponent
+{
+    //WhiteChest, BlueChest, OrangeChest, GreenChest, PurpleChest, BlackChest;
+    public Sprite[] OpenChestSprites;
+    public bool[] UsedChests;
+}
+
+public class PickUpItemSystem : IEcsInitSystem, IEcsRunSystem
+{
+    public void Init(IEcsSystems systems)
+    {
+        var ecsWorld = systems.GetWorld();
+        var gameData = systems.GetShared<GameData>();
+
+
+    }
+
+    public void Run(IEcsSystems systems)
+    {
+
+    }
 }

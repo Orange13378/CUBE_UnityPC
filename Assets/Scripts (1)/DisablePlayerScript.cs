@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DisablePlayerScript : MonoBehaviour
@@ -31,8 +29,7 @@ public class DisablePlayerScript : MonoBehaviour
             player.gameObject.GetComponent<Player1>().enabled = false;
             Animator animator = player.gameObject.GetComponent<Animator>();
             animator.SetBool("Stoped", true);
-            //player.gameObject.GetComponent<Animator>().enabled = false;
-            footsteps.gameObject.GetComponent<Footsteps>().enabled = false;
+            footsteps.gameObject.GetComponent<AudioSource>().enabled = false;
         }
     }
 
@@ -43,7 +40,7 @@ public class DisablePlayerScript : MonoBehaviour
             player.gameObject.GetComponent<Player1>().enabled = true;
             Animator animator = player.gameObject.GetComponent<Animator>();
             animator.SetBool("Stoped", false);
-            footsteps.gameObject.GetComponent<Footsteps>().enabled = true;
+            footsteps.gameObject.GetComponent<AudioSource>().enabled = true;
         }
     }
 }

@@ -66,7 +66,7 @@ TextureImporter:
       213: 4793147619635917694
     second: "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_20"
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -83,10 +83,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -125,6 +127,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -136,6 +140,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -148,6 +153,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -604,9 +623,30 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_0": -8460414090081952028
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_1": -1924752785007382394
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_10": 3549653580144755800
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_11": 7540635194303817592
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_12": -8286000573070331468
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_13": -1235710320993018974
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_14": 5177822293429926771
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_15": -7591776641477244707
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_16": -6930374560556299148
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_17": -6855887140699171792
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_18": 7623556385499639932
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_19": -3976396691449969204
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_2": -2764976445244563852
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_20": 4793147619635917694
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_3": 490612060798074870
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_4": 7935246114439120952
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_5": 6440763420827240209
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_6": 5312400609483327696
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_7": -6106971135040642057
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_8": 7262262531842834204
+      "SpriteSheet_\u0434\u0432\u0435\u0440\u044C 1_9": 4338124974991235045
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

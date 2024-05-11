@@ -123,7 +123,7 @@ TextureImporter:
       213: 2423502753178994352
     second: GUI 1_39
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -140,10 +140,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -182,6 +184,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -193,6 +197,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -205,6 +210,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -217,6 +223,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1072,9 +1079,49 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      GUI 1_0: 7127223443488175253
+      GUI 1_1: -847129249562328513
+      GUI 1_10: -7168545074560663072
+      GUI 1_11: -3744600892691428516
+      GUI 1_12: 418380396255084587
+      GUI 1_13: 4026252934400412259
+      GUI 1_14: 5832253642868715984
+      GUI 1_15: -6743840644159589658
+      GUI 1_16: -4831306288599821542
+      GUI 1_17: -6420472634855510285
+      GUI 1_18: -7922897418123003497
+      GUI 1_19: -5786648959514627451
+      GUI 1_2: -7046424138740760354
+      GUI 1_20: 1792137125267419644
+      GUI 1_21: 772724764907848657
+      GUI 1_22: -221221703407652942
+      GUI 1_23: -7972244330760966289
+      GUI 1_24: -1880751422062604422
+      GUI 1_25: -7658502916373363907
+      GUI 1_26: 1135491436503990300
+      GUI 1_27: -8262868723999990070
+      GUI 1_28: 6731967764938899210
+      GUI 1_29: -2853632950735859821
+      GUI 1_3: -3765996135761368904
+      GUI 1_30: 6846663246935152191
+      GUI 1_31: -6527308033613097526
+      GUI 1_32: 5311137628540409926
+      GUI 1_33: 6438049638632321759
+      GUI 1_34: -1227512570191413195
+      GUI 1_35: 5545504752724449128
+      GUI 1_36: 1087433606837031366
+      GUI 1_37: 2407765801314085826
+      GUI 1_38: 5041114348780641389
+      GUI 1_39: 2423502753178994352
+      GUI 1_4: 9109155648307290973
+      GUI 1_5: -3978569160848061476
+      GUI 1_6: 6701075469066883069
+      GUI 1_7: -2464574525705391120
+      GUI 1_8: -5094703230805197805
+      GUI 1_9: 4114091592792050631
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

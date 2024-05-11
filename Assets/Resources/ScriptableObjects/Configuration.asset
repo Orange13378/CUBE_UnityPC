@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f47222897a906df4f87f1f02fc026303, type: 3}
-  m_Name: NoteBlue
+  m_Script: {fileID: 11500000, guid: c97442438903d9d4b8b1838007bf973c, type: 3}
+  m_Name: Configuration
   m_EditorClassIdentifier: 
-  name: New Item
-  icon: {fileID: 0}
-  id: 0
-  showInInventory: 1
-  text: 
+  PlayerSpeed: 2
+  CameraFollowSmoothness: 0.8

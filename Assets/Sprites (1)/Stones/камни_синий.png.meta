@@ -21,7 +21,7 @@ TextureImporter:
       213: -7863614523194830207
     second: "\u043A\u0430\u043C\u043D\u0438_\u0441\u0438\u043D\u0438\u0439_5"
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -38,10 +38,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -80,6 +82,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -91,6 +95,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -103,6 +108,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -244,9 +263,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      "\u043A\u0430\u043C\u043D\u0438_\u0441\u0438\u043D\u0438\u0439_0": 176563983898453348
+      "\u043A\u0430\u043C\u043D\u0438_\u0441\u0438\u043D\u0438\u0439_1": -6793452254210635217
+      "\u043A\u0430\u043C\u043D\u0438_\u0441\u0438\u043D\u0438\u0439_2": 5032016351355063336
+      "\u043A\u0430\u043C\u043D\u0438_\u0441\u0438\u043D\u0438\u0439_3": -189851616223142677
+      "\u043A\u0430\u043C\u043D\u0438_\u0441\u0438\u043D\u0438\u0439_4": -518644453612665147
+      "\u043A\u0430\u043C\u043D\u0438_\u0441\u0438\u043D\u0438\u0439_5": -7863614523194830207
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

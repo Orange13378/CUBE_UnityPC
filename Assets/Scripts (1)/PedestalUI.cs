@@ -17,10 +17,6 @@ public class PedestalUI : MonoBehaviour
     public GameObject greenCube;
 
     int i = 0;
-    
-    void Start(){
-        
-    }
 
     void Update()
     {
@@ -229,11 +225,11 @@ public class PedestalUI : MonoBehaviour
     public void Stop()
     {
         player.gameObject.GetComponent<Player1>().enabled = false;
-        footStep.gameObject.GetComponent<Footsteps>().enabled = false;
+        //footStep.gameObject.GetComponent<Footsteps>().enabled = false; TODO
     }
     public void Go()
     {
         player.gameObject.GetComponent<Player1>().enabled = true;
-        footStep.gameObject.GetComponent<Footsteps>().enabled = true;
+        //footStep.gameObject.GetComponent<Footsteps>().enabled = true; TODO
     }
 }
