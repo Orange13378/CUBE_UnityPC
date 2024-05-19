@@ -12,10 +12,15 @@ namespace CubeECS
         private IEcsSystems fixedUpdateSystems;
         [SerializeField] private ConfigurationSO configuration;
         [SerializeField] private GameObject dialogPanel;
+        [SerializeField] private GameObject pedestalGO;
+        [SerializeField] private GameObject pedestalCubeGO;
         [SerializeField] private AudioClip[] footStepsAudioClips;
         [SerializeField] private Item[] items;
         [SerializeField] private Sprite[] chestSprites;
         [SerializeField] private GameObject[] chests;
+        [SerializeField] private GameObject[] worlds;
+        [SerializeField] private PedestalItem[] pedestals;
+        [SerializeField] private GameObject[] pedestalsUI;
         [SerializeField] private DialogSystem dialogSystem;
 
         private void Awake()
@@ -27,10 +32,15 @@ namespace CubeECS
 
             gameData.Configuration = configuration;
             gameData.DialogPanel = dialogPanel;
+            gameData.PedestalGO = pedestalGO;
+            gameData.PedestalCubeGO = pedestalCubeGO;
             gameData.FootStepsAudioClips = footStepsAudioClips;
             gameData.Items = items;
             gameData.OpenedChestSprites = chestSprites;
             gameData.Chests = chests;
+            gameData.Worlds = worlds;
+            gameData.Pedestals = pedestals;
+            gameData.PedestalsUI = pedestalsUI;
             gameData.DialogSystem = dialogSystem;
             //gameData.sceneService = Service<SceneService>.Get(true);
 
