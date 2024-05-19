@@ -23,9 +23,7 @@ namespace CubeECS
         public void Init(IEcsSystems systems)
         {
             var chestEntity = _world.Value.NewEntity();
-            ref var chestCmp = ref _chestPool.Value.Add(chestEntity);
-            chestCmp.ChestInteract = _gameData.Value.ChestInteract;
-            chestCmp.ChestInteract.Construct(_world.Value);
+            _chestPool.Value.Add(chestEntity);
 
             foreach (var entity in _chestFilter.Value)
             {
@@ -74,7 +72,7 @@ namespace CubeECS
                 {
                     ref var dialogComponent = ref _dialogPool.Value.Get(entity);
                     dialogComponent.DialogItem.InputText = chest.Success;
-                    dialogComponent.IsActive = true;
+                    dialogComponent.DialogSystem.StartDialog();
                 }
             }
             else
@@ -83,7 +81,7 @@ namespace CubeECS
                 {
                     ref var dialogComponent = ref _dialogPool.Value.Get(entity);
                     dialogComponent.DialogItem.InputText = chest.Bad;
-                    dialogComponent.IsActive = true;
+                    dialogComponent.DialogSystem.StartDialog();
                 }
             }
         }

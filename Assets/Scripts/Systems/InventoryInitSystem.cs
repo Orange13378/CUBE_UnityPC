@@ -15,12 +15,7 @@ namespace CubeECS
         {
             var inventoryEntity = _world.Value.NewEntity();
 
-            ref var inventoryCmp =  ref _inventoryPool.Value.Add(inventoryEntity);
-            inventoryCmp.InventoryView = _gameData.Value.InventoryView;
-            inventoryCmp.InventoryView.Construct(_world.Value);
-
-            inventoryCmp.ItemInteract = _gameData.Value.ItemInteract;
-            inventoryCmp.ItemInteract.Construct(_world.Value);
+            _inventoryPool.Value.Add(inventoryEntity);
 
             foreach (var entity in _inventoryFilter.Value)
             {

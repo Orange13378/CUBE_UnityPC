@@ -7,9 +7,6 @@ namespace CubeECS
         public List<Item> Items;
 
         public delegate void OnItemChanged();
-
         public OnItemChanged OnItemChangedCallback;
-        public InventoryView InventoryView;
-        public ItemInteract ItemInteract;
     }
 }

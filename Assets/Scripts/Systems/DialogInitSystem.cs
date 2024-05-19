@@ -3,7 +3,7 @@ using Leopotam.EcsLite.Di;
 
 namespace CubeECS
 {
-    public class DialogInitSystem : IEcsInitSystem, IEcsRunSystem
+    public class DialogInitSystem : IEcsInitSystem
     {
         private EcsWorldInject _world;
         private EcsFilterInject<Inc<DialogComponent>> _filters;
@@ -19,20 +19,7 @@ namespace CubeECS
             {
                 ref var dialogComponent = ref _dialogPool.Value.Get(entity);
                 dialogComponent.DialogSystem = _gameData.Value.DialogSystem;
-                dialogComponent.DialogSystem.Construct(_world.Value);
-            }
-        }
-
-        public void Run(IEcsSystems systems)
-        {
-            foreach (var entity in _filters.Value)
-            {
-                ref var dialogComponent = ref _dialogPool.Value.Get(entity);
-
-                if (!dialogComponent.IsActive)
-                    return;
-                
-                dialogComponent.DialogSystem.StartDialog();
+                dialogComponent.TextSpeed = 0.02f;
             }
         }
     }

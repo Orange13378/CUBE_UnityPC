@@ -1,7 +1,6 @@
 using CubeECS;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using UnityEngine;
 
 public class PlayerAnimationSystem : IEcsRunSystem
 {
@@ -15,14 +14,13 @@ public class PlayerAnimationSystem : IEcsRunSystem
         {
             ref var playerComponent = ref _playerPool.Value.Get(entity);
 
-            if (Input.GetKeyDown(KeyCode.R))
+            if (!playerComponent.IsPlayerActive)
             {
-                playerComponent.IsPlayerActive = true;
+                playerComponent.PlayerAnimator.SetBool("Stoped", true);
+                return;
             }
 
-            if (!playerComponent.IsPlayerActive)
-                return;
-
+            playerComponent.PlayerAnimator.SetBool("Stoped", false);
             ref var playerInputComponent = ref _playerInputPool.Value.Get(entity);
             playerComponent.PlayerAnimator.SetFloat("Horizontal", playerInputComponent.MoveInput.x);
             playerComponent.PlayerAnimator.SetFloat("Vertical", playerInputComponent.MoveInput.y);

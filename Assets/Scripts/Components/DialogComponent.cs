@@ -2,9 +2,9 @@ namespace CubeECS
 {
     public struct DialogComponent
     {
-        public bool IsActive;
         public DialogItemComponent DialogItem;
         public DialogSystem DialogSystem;
+        public float TextSpeed;
     }
 
     public struct DialogItemComponent

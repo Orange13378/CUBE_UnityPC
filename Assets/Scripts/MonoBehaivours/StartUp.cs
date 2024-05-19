@@ -16,14 +16,12 @@ namespace CubeECS
         [SerializeField] private Item[] items;
         [SerializeField] private Sprite[] chestSprites;
         [SerializeField] private GameObject[] chests;
-        [SerializeField] private ChestInteract chestInteract;
-        [SerializeField] private InventoryView inventoryView;
-        [SerializeField] private ItemInteract itemInteract;
         [SerializeField] private DialogSystem dialogSystem;
 
         private void Awake()
         {
             _world = new EcsWorld();
+            EcsWorldManager.SetEcsWorld(_world);
 
             var gameData = new GameData();
 
@@ -33,15 +31,13 @@ namespace CubeECS
             gameData.Items = items;
             gameData.OpenedChestSprites = chestSprites;
             gameData.Chests = chests;
-            gameData.ChestInteract = chestInteract;
-            gameData.InventoryView = inventoryView;
-            gameData.ItemInteract = itemInteract;
             gameData.DialogSystem = dialogSystem;
             //gameData.sceneService = Service<SceneService>.Get(true);
 
             initSystems = new EcsSystems(_world, gameData)
                     .Add(new PlayerInitSystem())
                     .Add(new InventoryInitSystem())
+                    .Add(new DialogInitSystem())
                     .Inject(gameData)
                 ;
 
@@ -52,8 +48,8 @@ namespace CubeECS
                     .Add(new FootstepsSystem())
                     .Add(new PlayerAnimationSystem())
                     .Add(new ChestOpenSystem())
-                    .Add(new DialogInitSystem())
                     .Add(new DisablePlayerSystem())
+                    .Add(new PedestalSystem())
 
 #if UNITY_EDITOR
                     .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
@@ -87,6 +83,25 @@ namespace CubeECS
             updateSystems?.Destroy();
             fixedUpdateSystems?.Destroy();
             _world?.Destroy();
+        }
+    }
+
+    public static class EcsWorldManager
+    {
+        private static EcsWorld _ecsWorld;
+
+        public static void SetEcsWorld(EcsWorld world)
+        {
+            _ecsWorld = world;
+        }
+
+        public static EcsWorld GetEcsWorld()
+        {
+            if (_ecsWorld == null)
+            {
+                UnityEngine.Debug.LogError("EcsWorld is not initialized!");
+            }
+            return _ecsWorld;
         }
     }
 }

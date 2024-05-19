@@ -10,16 +10,12 @@ namespace CubeECS
 
         private EcsFilter _filter;
         private EcsPool<ChestComponent> _chestPool;
-
         private EcsWorld _world;
 
-        public void Construct(EcsWorld world)
-        {
-            _world = world;
-        }
 
-        void Start()
+        private void Start()
         {
+            _world = EcsWorldManager.GetEcsWorld();
             _filter = _world.Filter<ChestComponent>().End();
             _chestPool = _world.GetPool<ChestComponent>();
 

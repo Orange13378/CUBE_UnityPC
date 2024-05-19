@@ -1,16 +1,21 @@
+using CubeECS;
+using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 using UnityEngine;
 
 public class PedestalUI : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject pedestalUI6, pedestalUI5, pedestalUI4, pedestalUI3, pedestalUI2, player, footStep;
+    public GameObject pedestalUI6, pedestalUI5, pedestalUI4, pedestalUI3, pedestalUI2, player;
     public GameObject whiteWorld, blueWorld, orangeWorld, purpleWorld, greenWorld, blackWorld, cube, blackCube;
-     [SerializeField]private Sprite sprite_White, sprite_Black, sprite_Blue, sprite_Green, sprite_Orange, sprite_Purple;
+    [SerializeField]
+    private Sprite sprite_White, sprite_Black, sprite_Blue, sprite_Green, sprite_Orange, sprite_Purple;
 
-     [SerializeField]private Sprite sprite_CBlack, sprite_CBlue, sprite_CGreen, sprite_COrange, sprite_CPurple;
+    [SerializeField]
+    private Sprite sprite_CBlack, sprite_CBlue, sprite_CGreen, sprite_COrange, sprite_CPurple;
 
-    public static bool goBlackWorld = false, goBlueWorld = false, goOrangeWorld = false, goGreenWorld = false, goPurpleWorld = false;
-    private bool entered_pedestal = false;
+    public static bool goBlackWorld, goBlueWorld, goOrangeWorld, goGreenWorld, goPurpleWorld;
+    private bool entered_pedestal;
 
     public GameObject greenCube;
 
@@ -229,5 +234,46 @@ public class PedestalUI : MonoBehaviour
     {
         player.gameObject.GetComponent<Player1>().enabled = true;
         //footStep.gameObject.GetComponent<Footsteps>().enabled = true; TODO
+    }
+}
+
+public struct PedestalComponent
+{
+    public SpriteRenderer CurrentSprite;
+    public PedestalWorld CurrentWorld;
+    public bool IsEntered;
+    public PedestalInteract PedestalInteract;
+    public enum PedestalWorld
+    {
+        White = 0,
+        Blue = 1,
+        Orange = 2,
+        Green = 3,
+        Purple = 4,
+        Black = 5,
+    }
+}
+
+public class PedestalSystem : IEcsInitSystem, IEcsRunSystem
+{
+    private EcsWorldInject _world;
+    private EcsPoolInject<PedestalComponent> _pedestalPool;
+    private EcsFilterInject<Inc<PedestalComponent>> _pedestalFilter;
+    private EcsCustomInject<GameData> _gameData;
+    public void Init(IEcsSystems systems)
+    {
+        var pedestalEntity = _world.Value.NewEntity();
+
+        ref var pedestalCmp = ref _pedestalPool.Value.Add(pedestalEntity);
+    }
+
+    public void Run(IEcsSystems systems)
+    {
+        foreach (var entity in _pedestalFilter.Value)
+        {
+            ref var pedestalCmp = ref _pedestalPool.Value.Get(entity);
+
+            
+        }
     }
 }

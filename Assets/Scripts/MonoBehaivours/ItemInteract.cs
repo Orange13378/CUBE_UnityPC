@@ -8,29 +8,30 @@ namespace CubeECS
         [SerializeField] private Item item;
 
         private EcsWorld _ecsWorld;
+        private EcsFilter _filter;
+        private EcsPool<InventoryComponent> _pool;
 
-        public void Construct(EcsWorld world)
+        private void Start()
         {
-            _ecsWorld = world;
+            _ecsWorld = EcsWorldManager.GetEcsWorld();
+            _filter = _ecsWorld.Filter<InventoryComponent>().End();
+            _pool = _ecsWorld.GetPool<InventoryComponent>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
+            if (!other.CompareTag("Player")) return;
+
+            foreach (var entity in _filter)
             {
-                var filter = _ecsWorld.Filter<InventoryComponent>().End();
-                var inventoryPool = _ecsWorld.GetPool<InventoryComponent>();
-                foreach (var entity in filter)
-                {
-                    ref var inventoryComponent = ref inventoryPool.Get(entity);
+                ref var inventoryCmp = ref _pool.Get(entity);
 
-                    inventoryComponent.Items.Add(item); 
-                    if (inventoryComponent.OnItemChangedCallback != null)
-                        inventoryComponent.OnItemChangedCallback.Invoke();
-                }
-
-                Destroy(gameObject);
+                inventoryCmp.Items.Add(item); 
+                if (inventoryCmp.OnItemChangedCallback != null)
+                    inventoryCmp.OnItemChangedCallback.Invoke();
             }
+
+            Destroy(gameObject);
         }
     }
 }

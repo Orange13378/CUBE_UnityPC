@@ -1,22 +1,16 @@
-using Leopotam.EcsLite;
 using UnityEngine;
 
 namespace CubeECS
 {
     public class InventoryView : MonoBehaviour
     {
-        private EcsWorld _ecsWorld;
         private InventoryComponent _inventory;
-
-        public void Construct(EcsWorld world)
-        {
-            _ecsWorld = world;
-        }
 
         private void Start()
         {
-            var filter = _ecsWorld.Filter<InventoryComponent>().End();
-            var inventoryPool = _ecsWorld.GetPool<InventoryComponent>();
+            var ecsWorld = EcsWorldManager.GetEcsWorld();
+            var filter = ecsWorld.Filter<InventoryComponent>().End();
+            var inventoryPool = ecsWorld.GetPool<InventoryComponent>();
 
             foreach (var entity in filter)
             {

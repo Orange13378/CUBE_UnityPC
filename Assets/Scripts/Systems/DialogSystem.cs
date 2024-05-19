@@ -9,26 +9,20 @@ namespace CubeECS
     {
         [SerializeField]
         private GameObject _dialogPanel;
-        [SerializeField]
-        private float _textSpeed = 0.02f;
 
-        private DialogComponent _dialogComponent;
+        private bool _isProcessing;
+        private bool _continueDialog;
+        private Text _dialogText;
 
         private EcsWorld _world;
         private EcsPool<DialogComponent> _dialogPool;
         private EcsPool<DisablePlayerComponent> _disablePlayerPool;
         private EcsFilter _dialogFilter;
-        private Text _dialogText;
-        private bool _isProcessing;
-        private bool _continueDialog;
-
-        public void Construct(EcsWorld world)
-        {
-            _world = world;
-        }
+        private DialogComponent _dialogComponent;
 
         private void Start()
         {
+            _world = EcsWorldManager.GetEcsWorld();
             _dialogPool = _world.GetPool<DialogComponent>();
             _disablePlayerPool = _world.GetPool<DisablePlayerComponent>();
             _dialogFilter = _world.Filter<DialogComponent>().End();
@@ -48,7 +42,6 @@ namespace CubeECS
             foreach (var entity in _dialogFilter)
             {
                 ref var dialogCmp = ref _dialogPool.Get(entity);
-                dialogCmp.IsActive = false;
                 _dialogComponent = dialogCmp;
             }
 
@@ -72,7 +65,7 @@ namespace CubeECS
             foreach (char c in _dialogComponent.DialogItem.InputText)
             {
                 _dialogText.text += c;
-                yield return new WaitForSeconds(_textSpeed);
+                yield return new WaitForSeconds(_dialogComponent.TextSpeed);
             }
 
             yield return new WaitUntil(() => _continueDialog);
