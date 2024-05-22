@@ -36,7 +36,7 @@ namespace CubeECS
 
                 pedestalCmp.IsEntered = false;
 
-                if (pedestalCmp.CurrentUI == PedestalComponent.PedestalWorld.White)
+                if (pedestalCmp.CurrentUI == PedestalWorld.White)
                 {
                     foreach (var dialogEntity in _dialogFilter.Value)
                     {

@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PressE : MonoBehaviour
 {
-
     [SerializeField] GameObject buttonE;
-
-    //inventoryUI.SetActive(!inventoryUI.activeSelf);
 
     private void OnTriggerEnter2D(Collider2D other)
     {

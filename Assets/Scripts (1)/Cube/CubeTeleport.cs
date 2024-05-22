@@ -1,14 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using UnityEngine.PlayerLoop;
 
 public class CubeTeleport : MonoBehaviour
 {
     private bool entered = false;
 
-    public Vector3 vector = new Vector3();
+    public Vector3 vector = new();
 
     [SerializeField] private GameObject player;
 
@@ -17,33 +17,26 @@ public class CubeTeleport : MonoBehaviour
     [SerializeField] private Image image;
 
     bool teleported = false, pressedE = false, dialog2 = true;
-    public static bool dialog = true, switched = false;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-            if(entered)
+        if (entered)
+        {
+            if ((Input.GetKeyDown(KeyCode.E)))
             {
-                if((Input.GetKeyDown(KeyCode.E)))
+                if (!pressedE)
                 {
-                    if(!pressedE)
-                    {
-                        vCamera.gameObject.SetActive(true);
-                        vCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1f;
-                        vCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1f;
-                        StartCoroutine(Teleport());
-                    }
+                    vCamera.gameObject.SetActive(true);
+                    vCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1f;
+                    vCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1f;
+                    StartCoroutine(Teleport());
                 }
+            }
 
-                if (teleported)
-                {
-                    StartCoroutine(Teleporting());
-                }
-
+            if (teleported)
+            {
+                StartCoroutine(Teleporting());
+            }
         }
     }
 
@@ -87,11 +80,23 @@ public class CubeTeleport : MonoBehaviour
         }
     }
 
-     private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             entered = false;
         }
     }
+}
+
+public struct CubeComponent
+{
+    public GameObject Player;
+    public string DialogText;
+
+    public delegate void OnInteracted();
+    public OnInteracted OnInteractedCallback;
+
+    public CinemachineVirtualCamera VirtualCamera;
+    public CinemachineBasicMultiChannelPerlin VirtualCameraChannel;
 }

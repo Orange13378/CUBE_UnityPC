@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Perekat : MonoBehaviour
@@ -27,10 +25,10 @@ public class Perekat : MonoBehaviour
     {
         if (goTime)
         {
-        moveVelocity.x = 0.1f;
-        moveVelocity.y = -0.1f;
-        Vector2 pos = new Vector2(moveVelocity.x, moveVelocity.y);
-        moveVelocity = pos.normalized * moveSpeed;
+            moveVelocity.x = 0.1f;
+            moveVelocity.y = -0.1f;
+            Vector2 pos = new Vector2(moveVelocity.x, moveVelocity.y);
+            moveVelocity = pos.normalized * moveSpeed;
         }
 
         if (breakTime) 
@@ -38,10 +36,10 @@ public class Perekat : MonoBehaviour
             reloadTime -= Time.deltaTime;
             if (reloadTime < 0)
             {
-            goTime = true;
-            breakTime = false;
-            reloadTime = 5f; //здесь поменять на свои значения по времени
-            transform.position = beginPos; // перемщение на определенную позицию
+                goTime = true;
+                breakTime = false;
+                reloadTime = 5f; //здесь поменять на свои значения по времени
+                transform.position = beginPos; // перемщение на определенную позицию
             }
         }
         else
@@ -60,6 +58,6 @@ public class Perekat : MonoBehaviour
     void FixedUpdate()
     {
         if (goTime)
-        rb.MovePosition(rb.position + moveVelocity * moveSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + moveVelocity * moveSpeed * Time.fixedDeltaTime);
     }
 }

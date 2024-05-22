@@ -1,6 +1,4 @@
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class PedestalUI : MonoBehaviour
 {

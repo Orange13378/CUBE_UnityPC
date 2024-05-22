@@ -26,9 +26,8 @@ namespace CubeECS
             {
                 ref var inventoryCmp = ref _pool.Get(entity);
 
-                inventoryCmp.Items.Add(item); 
-                if (inventoryCmp.OnItemChangedCallback != null)
-                    inventoryCmp.OnItemChangedCallback.Invoke();
+                inventoryCmp.Items.Add(item);
+                inventoryCmp.OnItemChangedCallback?.Invoke();
             }
 
             Destroy(gameObject);

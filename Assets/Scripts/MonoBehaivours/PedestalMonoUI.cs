@@ -23,11 +23,23 @@ namespace CubeECS
             foreach (var entity in _filter)
             {
                 ref var pedestalCmp = ref _pedestalPool.Get(entity);
+                pedestalCmp.OnInteractedCallback += ChangePedestalView;
                 _pedestalComponent = pedestalCmp;
-                _pedestalComponent.OnInteractedCallback += Interact;
                 _pedestalSprite = _pedestalComponent.PedestalGO.GetComponent<SpriteRenderer>();
                 _pedestalCubeSprite = _pedestalComponent.PedestalCubeGO.GetComponent<SpriteRenderer>();
             }
+        }
+
+        private void ChangePedestalView()
+        {
+            foreach (var entity in _filter)
+            {
+                ref var pedestalCmp = ref _pedestalPool.Get(entity);
+                _pedestalComponent = pedestalCmp;
+            }
+
+            _pedestalCubeSprite.sprite = _pedestalComponent.PedestalItems[(int)_pedestalComponent.CurrentWorld].CubeSprite;
+            SetCurrentWorld(_pedestalComponent.CurrentWorld);
         }
 
         private void Interact()
@@ -35,9 +47,6 @@ namespace CubeECS
             var currentWorldIndex = (int)_pedestalComponent.CurrentWorld;
             var currentUIIndex = (int)_pedestalComponent.CurrentUI;
             _pedestalSprite.sprite = _pedestalComponent.PedestalItems[currentWorldIndex].Sprite;
-            
-            // _pedestalCubeSprite.sprite = _pedestalComponent.PedestalItems[currentWorldIndex].CubeSprite;
-            // При добавлении нового мира.
 
             foreach (var world in _pedestalComponent.Worlds)
             {
@@ -51,7 +60,7 @@ namespace CubeECS
             _disablePlayerPool.Add(disablePlayer).Deactivate = false;
         }
 
-        private void SetCurrentWorld(PedestalComponent.PedestalWorld currentWorld)
+        private void SetCurrentWorld(PedestalWorld currentWorld)
         {
             foreach (var entity in _filter)
             {
@@ -64,32 +73,32 @@ namespace CubeECS
 
         public void PressedWhite()
         {
-            SetCurrentWorld(PedestalComponent.PedestalWorld.White);
+            SetCurrentWorld(PedestalWorld.White);
         }
 
         public void PressedBlue()
         {
-            SetCurrentWorld(PedestalComponent.PedestalWorld.Blue);
+            SetCurrentWorld(PedestalWorld.Blue);
         }
 
         public void PressedOrange()
         {
-            SetCurrentWorld(PedestalComponent.PedestalWorld.Orange);
+            SetCurrentWorld(PedestalWorld.Orange);
         }
 
         public void PressedGreen()
         {
-            SetCurrentWorld(PedestalComponent.PedestalWorld.Green);
+            SetCurrentWorld(PedestalWorld.Green);
         }
 
         public void PressedPurple()
         {
-            SetCurrentWorld(PedestalComponent.PedestalWorld.Purple);
+            SetCurrentWorld(PedestalWorld.Purple);
         }
 
         public void PressedBlack()
         {
-            SetCurrentWorld(PedestalComponent.PedestalWorld.Black);
+            SetCurrentWorld(PedestalWorld.Black);
         }
     }
 }

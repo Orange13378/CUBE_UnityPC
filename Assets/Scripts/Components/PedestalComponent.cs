@@ -16,15 +16,15 @@ namespace CubeECS
         public delegate void OnInteracted();
 
         public OnInteracted OnInteractedCallback;
+    }
 
-        public enum PedestalWorld
-        {
-            White = 0,
-            Blue = 1,
-            Orange = 2,
-            Green = 3,
-            Purple = 4,
-            Black = 5,
-        }
+    public enum PedestalWorld
+    {
+        White = 0,
+        Blue = 1,
+        Orange = 2,
+        Green = 3,
+        Purple = 4,
+        Black = 5,
     }
 }

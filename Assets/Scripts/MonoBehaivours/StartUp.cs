@@ -1,6 +1,8 @@
+using Cinemachine;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CubeECS
 {
@@ -10,7 +12,10 @@ namespace CubeECS
         private IEcsSystems initSystems;
         private IEcsSystems updateSystems;
         private IEcsSystems fixedUpdateSystems;
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        [SerializeField] private Image whiteScreenImage;
         [SerializeField] private ConfigurationSO configuration;
+        [SerializeField] private GameObject player;
         [SerializeField] private GameObject dialogPanel;
         [SerializeField] private GameObject pedestalGO;
         [SerializeField] private GameObject pedestalCubeGO;
@@ -29,8 +34,10 @@ namespace CubeECS
             EcsWorldManager.SetEcsWorld(_world);
 
             var gameData = new GameData();
-
+            gameData.VirtualCamera = virtualCamera;
+            gameData.WhiteScreenImage = whiteScreenImage;
             gameData.Configuration = configuration;
+            gameData.Player = player;
             gameData.DialogPanel = dialogPanel;
             gameData.PedestalGO = pedestalGO;
             gameData.PedestalCubeGO = pedestalCubeGO;
@@ -48,6 +55,7 @@ namespace CubeECS
                     .Add(new PlayerInitSystem())
                     .Add(new InventoryInitSystem())
                     .Add(new DialogInitSystem())
+                    .Add(new CubeInitSystem())
                     .Inject(gameData)
                 ;
 
@@ -60,6 +68,7 @@ namespace CubeECS
                     .Add(new ChestOpenSystem())
                     .Add(new DisablePlayerSystem())
                     .Add(new PedestalSystem())
+                    .Add(new WhiteImageSystem())
 
 #if UNITY_EDITOR
                     .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
@@ -109,7 +118,7 @@ namespace CubeECS
         {
             if (_ecsWorld == null)
             {
-                UnityEngine.Debug.LogError("EcsWorld is not initialized!");
+                Debug.LogError("EcsWorld is not initialized!");
             }
             return _ecsWorld;
         }
