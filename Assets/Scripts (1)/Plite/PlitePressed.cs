@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlitePressed : MonoBehaviour {
@@ -9,11 +7,12 @@ public class PlitePressed : MonoBehaviour {
     [System.NonSerialized] public bool electro_pressed = true;
 
     public enum States
-{
-    State0 = 0,
-    State1 = 1,
-    State2 = 2
-}
+    {
+        State0 = 0,
+        State1 = 1,
+        State2 = 2
+    }
+
     States st;
     private void Start()
     {

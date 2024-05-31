@@ -48,11 +48,11 @@ public class CubeTeleport : MonoBehaviour
         pressedE = true;
         yield return new WaitUntil((() => !dialog2));
 
-        if (DialogSystem.message.Count == 0)
+        /*if (DialogSystem.message.Count == 0)
         {
             DialogSystem.message.Add("Опять меня куда-то переместило");
             DialogSystem.on = true;
-        }
+        }*/
     }
 
     IEnumerator Teleporting()
@@ -87,16 +87,4 @@ public class CubeTeleport : MonoBehaviour
             entered = false;
         }
     }
-}
-
-public struct CubeComponent
-{
-    public GameObject Player;
-    public string DialogText;
-
-    public delegate void OnInteracted();
-    public OnInteracted OnInteractedCallback;
-
-    public CinemachineVirtualCamera VirtualCamera;
-    public CinemachineBasicMultiChannelPerlin VirtualCameraChannel;
 }

@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using CubeECS;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 public class StoneScript : MonoBehaviour
@@ -15,30 +15,35 @@ public class StoneScript : MonoBehaviour
 		instance = this;
 	}
 
-	#endregion
-    
-    void Start()
-    {
-        
-    }
+    #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
+    private EcsFilter _dialogFilter;
+    private EcsPool<DialogComponent> _dialogPool;
 
+    private void Start()
+    {
+        var ecsWorld = EcsWorldManager.GetEcsWorld();
+        _dialogFilter = ecsWorld.Filter<DialogComponent>().End();
+        _dialogPool = ecsWorld.GetPool<DialogComponent>();
     }
 
     public void GetText(Stones stoneID)
     {
-        DialogSystem.message.Add($"{stoneID.text}");
-        var script1 = diaolog.GetComponent<DialogSystem>();
-        StartCoroutine(script1.StartDialog());
+        foreach (var entity in _dialogFilter)
+        {
+            ref var dialogComponent = ref _dialogPool.Get(entity);
+            dialogComponent.DialogItem.InputText = stoneID.text;
+            dialogComponent.DialogSystem.StartDialog();
+        }
     }
 
     public void GetElectroText(Stones stoneID)
     {
-        DialogSystem.message.Add($"{stoneID.electroText}");
-        var script1 = diaolog.GetComponent<DialogSystem>();
-        StartCoroutine(script1.StartDialog());
+        foreach (var entity in _dialogFilter)
+        {
+            ref var dialogComponent = ref _dialogPool.Get(entity);
+            dialogComponent.DialogItem.InputText = stoneID.electroText;
+            dialogComponent.DialogSystem.StartDialog();
+        }
     }
 }

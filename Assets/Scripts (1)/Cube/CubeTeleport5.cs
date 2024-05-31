@@ -52,11 +52,11 @@ public class CubeTeleport5 : MonoBehaviour
 
         yield return new WaitUntil((() => !dialog2));
         
-        if (DialogSystem.message.Count == 0)
+        /*if (DialogSystem.message.Count == 0)
         {
             DialogSystem.message.Add("Почему вдруг стало так темно");
             DialogSystem.on = true;
-        }
+        }*/
     }
 
     IEnumerator Teleporting()

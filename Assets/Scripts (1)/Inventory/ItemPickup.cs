@@ -1,3 +1,5 @@
+using CubeECS;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 public class ItemPickup : MonoBehaviour {
@@ -8,10 +10,20 @@ public class ItemPickup : MonoBehaviour {
 
 	[SerializeField] private GameObject objectUI;
 
+    private EcsFilter _dialogFilter;
+    private EcsPool<DialogComponent> _dialogPool;
+
+    private void Start()
+    {
+        var ecsWorld = EcsWorldManager.GetEcsWorld();
+        _dialogFilter = ecsWorld.Filter<DialogComponent>().End();
+        _dialogPool = ecsWorld.GetPool<DialogComponent>();
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //PickUp();
+        PickUp();
     }
 
 	// Pick up the item
@@ -20,9 +32,15 @@ public class ItemPickup : MonoBehaviour {
 		if(item.id == 0)
 		{
 			electro = true;
-			DialogSystem.message.Add("Похоже на лампочку");
-            DialogSystem.message.Add("<Открылась возможность использовать предмет в отдельном меню>");
-			DialogSystem.on = true;
+
+            foreach (var entity in _dialogFilter)
+            {
+                ref var dialogComponent = ref _dialogPool.Get(entity);
+                dialogComponent.DialogItem.InputText = "Похоже на лампочку " +
+                                                       "<Открылась возможность использовать предмет в отдельном меню>";
+                dialogComponent.DialogSystem.StartDialog();
+            }
+
 			objectUI.SetActive(true);
 			gameObject.SetActive(false);
 		}
@@ -30,9 +48,15 @@ public class ItemPickup : MonoBehaviour {
 		else if(item.id == 1)
 		{
 			termo = true;
-			DialogSystem.message.Add("Похоже на термометр");
-            DialogSystem.message.Add("<Открылась возможность использовать термометр>");
-			DialogSystem.on = true;
+
+            foreach (var entity in _dialogFilter)
+            {
+                ref var dialogComponent = ref _dialogPool.Get(entity);
+                dialogComponent.DialogItem.InputText = "Похоже на термометр " +
+                                                       "<Открылась возможность использовать термометр>";
+                dialogComponent.DialogSystem.StartDialog();
+            }
+
 			objectUI.SetActive(true);
 			gameObject.SetActive(false);
 		}
@@ -40,26 +64,33 @@ public class ItemPickup : MonoBehaviour {
 		else if(item.id == 2)
 		{
 			magnit = true;
-			DialogSystem.message.Add("Это магнит");
-			DialogSystem.message.Add("<Открылась возможность использовать магнит>");
-			DialogSystem.on = true;
-			objectUI.SetActive(true);
+
+            foreach (var entity in _dialogFilter)
+            {
+                ref var dialogComponent = ref _dialogPool.Get(entity);
+                dialogComponent.DialogItem.InputText = "Это магнит " +
+                                                       "<Открылась возможность использовать магнит>";
+                dialogComponent.DialogSystem.StartDialog();
+            }
+
+            objectUI.SetActive(true);
 			gameObject.SetActive(false);
 		}
 
 		else if(item.id == 3)
 		{
 			time = true;
-			DialogSystem.message.Add("Странные часы");
-			DialogSystem.message.Add("<Открылась возможность использовать часы>");
-			DialogSystem.on = true;
-			objectUI.SetActive(true);
+
+            foreach (var entity in _dialogFilter)
+            {
+                ref var dialogComponent = ref _dialogPool.Get(entity);
+                dialogComponent.DialogItem.InputText = "Странные часы " +
+                                                       "<Открылась возможность использовать часы>";
+                dialogComponent.DialogSystem.StartDialog();
+            }
+
+            objectUI.SetActive(true);
 			gameObject.SetActive(false);
-		}
-		else 
-		{
-			Inventory.instance.Add(item);	// Add to inventory
-			Destroy(gameObject);			// Destroy item from scene
 		}
 	}
 

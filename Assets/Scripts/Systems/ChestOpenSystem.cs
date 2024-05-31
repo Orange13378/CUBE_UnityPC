@@ -41,6 +41,12 @@ namespace CubeECS
 
         public void Run(IEcsSystems systems)
         {
+            foreach (var entity in _chestFilter.Value)
+            {
+                ref var chestComponent = ref _chestPool.Value.Get(entity);
+                _chestComponent = chestComponent;
+            }
+
             var chest = _chestComponent.Items.FirstOrDefault(x => x.IsOpened == false);
 
             if (chest != null)
@@ -51,10 +57,11 @@ namespace CubeECS
                 {
                     chest.IsOpened = true;
                     _inventoryComponent.Items.Remove(item);
-                    _inventoryComponent.OnItemChangedCallback?.Invoke();
+                    _inventoryComponent.OnItemChangedUICallback?.Invoke();
                 }
 
                 StartDialog(chest);
+
                 _chestComponent.Items.Remove(chest);
             }
         }
@@ -74,6 +81,8 @@ namespace CubeECS
                     dialogComponent.DialogItem.InputText = chest.Success;
                     dialogComponent.DialogSystem.StartDialog();
                 }
+
+                _chestComponent.CurrentOpenedItem.SetActive(true);
             }
             else
             {

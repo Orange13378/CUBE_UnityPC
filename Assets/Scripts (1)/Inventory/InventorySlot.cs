@@ -1,3 +1,5 @@
+using CubeECS;
+using Leopotam.EcsLite;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,19 +7,29 @@ public class InventorySlot : MonoBehaviour {
 
 	public Image icon;
 
-	Item item;
+	private Item _item;
 
-	public void AddItem(Item newItem)
+	private EcsFilter _dialogFilter;
+	private EcsPool<DialogComponent> _dialogPool;
+
+    private void Start()
+    {
+        var ecsWorld = EcsWorldManager.GetEcsWorld();
+        _dialogFilter = ecsWorld.Filter<DialogComponent>().End();
+        _dialogPool = ecsWorld.GetPool<DialogComponent>();
+    }
+
+    public void AddItem(Item newItem)
 	{
-		item = newItem;
+		_item = newItem;
 
-		icon.sprite = item.icon;
+		icon.sprite = _item.icon;
 		icon.enabled = true;
 	}
 
 	public void ClearSlot()
 	{
-		item = null;
+		_item = null;
 
 		icon.sprite = null;
 		icon.enabled = false;
@@ -25,9 +37,14 @@ public class InventorySlot : MonoBehaviour {
 
 	public void UseItem()
 	{
-		if (item != null)
+		if (_item != null)
 		{
-			item.Use();
-		}
+            foreach (var entity in _dialogFilter)
+            {
+                ref var dialogComponent = ref _dialogPool.Get(entity);
+                dialogComponent.DialogItem.InputText = _item.text;
+                dialogComponent.DialogSystem.StartDialog();
+            }
+        }
 	}
 }

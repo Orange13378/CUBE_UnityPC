@@ -7,6 +7,7 @@ namespace CubeECS
     public class ChestInteract : MonoBehaviour
     {
         [SerializeField] public ChestItem chestItem;
+        [SerializeField] public GameObject openedItem;
 
         private EcsFilter _filter;
         private EcsPool<ChestComponent> _chestPool;
@@ -35,7 +36,10 @@ namespace CubeECS
                         return;
 
                     if (!chestComponent.Items.Contains(chestItem))
+                    {
                         chestComponent.Items.Add(chestItem);
+                        chestComponent.CurrentOpenedItem = openedItem;
+                    }
                 }
             }
         }

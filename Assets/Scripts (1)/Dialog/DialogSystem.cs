@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogSystem : MonoBehaviour
+/*public class DialogSystem : MonoBehaviour
 {
     [SerializeField] private GameObject panelDialog;
     [SerializeField] private Sprite sprite;
@@ -72,4 +72,4 @@ public class DialogSystem : MonoBehaviour
         Item.same.Add(-1);
         started = false;
     }
-}
+}*/

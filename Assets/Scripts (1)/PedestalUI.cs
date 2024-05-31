@@ -90,11 +90,11 @@ public class PedestalUI : MonoBehaviour
                     break;
 
                     default: 
-                    if (DialogSystem.message.Count == 0)
+                    /*if (DialogSystem.message.Count == 0)
                     {
                         DialogSystem.message.Add("Ничего не происходит");
                         DialogSystem.on = true;
-                    }
+                    }*/
                     break;
                 }
 

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -7,12 +6,12 @@ public class MoveBlocks : MonoBehaviour
 {
     [SerializeField] Vector3 nextPos = new Vector3();
 
-    bool moved, pressedE, entered, once;
+    private bool moved, pressedE, entered, once;
     Vector3 startPos;
     [SerializeField] private GameObject player, underPlite1, underPlite2;
     [SerializeField] private Sprite sprite_goPlite, sprite_backPlite, spriteN , spriteS;
 
-    public static bool sprite = false;
+    public static bool sprite;
     void Start()
     {
         startPos = gameObject.transform.position;
@@ -20,7 +19,6 @@ public class MoveBlocks : MonoBehaviour
         pressedE = false;
         entered = false;
         once = true;
-        //waited = true;
     }
 
     void Update()

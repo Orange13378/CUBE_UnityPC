@@ -45,9 +45,8 @@ public class Inventory : MonoBehaviour {
 
 			items.Add(item);
 
-            if (onItemChangedCallback != null)
-			    onItemChangedCallback.Invoke();
-            
+            onItemChangedCallback?.Invoke();
+
             StartCoroutine(ItemPickedUp());
 		}
     }
@@ -60,19 +59,11 @@ public class Inventory : MonoBehaviour {
     IEnumerator ItemPickedUp()
     {
         panelDrop.SetActive(true);
-        itemPicked.text =  $"Предмет <color=purple>{items[items.Count - 1].name}</color> был подобран";
+        if (items.Count >= 1) 
+            itemPicked.text =  $"Предмет <color=purple>{items[^1].name}</color> был подобран";
         yield return new WaitForSeconds(2.5f);
         panelDrop.SetActive(false);
     }
-
-    // Remove an item
-    public void Remove (Item item)
-	{
-		items.Remove(item);
-
-		if (onItemChangedCallback != null)
-			onItemChangedCallback.Invoke();
-	}
 
     private void Update()
     {
@@ -90,21 +81,15 @@ public class Inventory : MonoBehaviour {
                         if (onItemChangedCallback != null)
                             onItemChangedCallback.Invoke();
 
-                        if (DialogSystem.message.Count == 0)
-                        {
-                            DialogSystem.message.Add("Что это выпало из сундука?");
-                            DialogSystem.on = true;
-                        }
+                        Debug.Log("Что это выпало из сундука?");
+
                         stoneBlue.SetActive(true);
                         return;
                     }
                     else
                     {
-                        if (DialogSystem.message.Count == 0)
-                        {
-                            DialogSystem.message.Add("Что бы открыть сундук нужен белый ключ");
-                            DialogSystem.on = true;
-                        }
+                        Debug.Log("Что бы открыть сундук нужен белый ключ");
+                        
                         return;
                     }
                 }
@@ -125,11 +110,7 @@ public class Inventory : MonoBehaviour {
                     }
                     else
                     {
-                        if (DialogSystem.message.Count == 0)
-                        {
-                            DialogSystem.message.Add("Что бы открыть сундук нужен оранжевый ключ");
-                            DialogSystem.on = true;
-                        }
+                        Debug.Log("Что бы открыть сундук нужен оранжевый ключ");
                         return;
                     }
                 }
@@ -144,21 +125,14 @@ public class Inventory : MonoBehaviour {
                         if (onItemChangedCallback != null)
                             onItemChangedCallback.Invoke();
 
-                        if (DialogSystem.message.Count == 0)
-                        {
-                            DialogSystem.message.Add("Еще один куб");
-                            DialogSystem.on = true;
-                        }
+                        Debug.Log("Еще один куб");
+
                         stoneOrange.SetActive(true);
                         return;
                     }
                     else
                     {
-                        if (DialogSystem.message.Count == 0)
-                        {
-                            DialogSystem.message.Add("Что бы открыть сундук нужен синий ключ");
-                            DialogSystem.on = true;
-                        }
+                        Debug.Log("Что бы открыть сундук нужен синий ключ");
                         return;
                     }
                 }
@@ -179,11 +153,8 @@ public class Inventory : MonoBehaviour {
                     }
                     else
                     {
-                        if (DialogSystem.message.Count == 0)
-                        {
-                            DialogSystem.message.Add("Что бы открыть сундук нужен зеленый ключ");
-                            DialogSystem.on = true;
-                        }
+                        Debug.Log("Что бы открыть сундук нужен зеленый ключ");
+
                         return;
                     }
                 }
@@ -205,11 +176,7 @@ public class Inventory : MonoBehaviour {
                     }
                     else
                     {
-                        if (DialogSystem.message.Count == 0)
-                        {
-                            DialogSystem.message.Add("Что бы открыть сундук нужен фиолетовый ключ");
-                            DialogSystem.on = true;
-                        }
+                        Debug.Log("Что бы открыть сундук нужен фиолетовый ключ");
                         return;
                     }
                 }
@@ -231,11 +198,8 @@ public class Inventory : MonoBehaviour {
                     }
                     else
                     {
-                        if (DialogSystem.message.Count == 0)
-                        {
-                            DialogSystem.message.Add("Что бы открыть сундук нужен черный ключ");
-                            DialogSystem.on = true;
-                        }
+                        Debug.Log("Что бы открыть сундук нужен черный ключ");
+
                         return;
                     }
                 }

@@ -27,6 +27,7 @@ namespace CubeECS
                 ref var inventoryCmp = ref _pool.Get(entity);
 
                 inventoryCmp.Items.Add(item);
+                //inventoryCmp.OnItemChangedUICallback?.Invoke();
                 inventoryCmp.OnItemChangedCallback?.Invoke();
             }
 

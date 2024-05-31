@@ -1,4 +1,5 @@
-using System.Collections;
+using CubeECS;
+using Leopotam.EcsLite;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,18 +31,19 @@ public class PliteScripts : MonoBehaviour
 
     public GameObject electro;
 
-    void Start()
+    private EcsFilter _dialogFilter;
+    private EcsPool<DialogComponent> _dialogPool;
+
+    private void Start()
     {
+        var ecsWorld = EcsWorldManager.GetEcsWorld();
+        _dialogFilter = ecsWorld.Filter<DialogComponent>().End();
+        _dialogPool = ecsWorld.GetPool<DialogComponent>();
+
         audioSource = GetComponent<AudioSource>();
         nextStage1 = false;
         nextStage = true;
         nextStage2 = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void GetCode(PliteID pliteID)
@@ -58,8 +60,14 @@ public class PliteScripts : MonoBehaviour
             if((id1) && !pressedID.Exists(x => x == 36))
             {
                 id1 = false; id2 = false;
-                DialogSystem.message.Add("Кажется что-то приблежается");
-                DialogSystem.on = true;
+
+                foreach (var entity in _dialogFilter)
+                {
+                    ref var dialogComponent = ref _dialogPool.Get(entity);
+                    dialogComponent.DialogItem.InputText = "Кажется что-то приближается";
+                    dialogComponent.DialogSystem.StartDialog();
+                }
+
                 correctCode = true;
                 nextStage = false;
                 nextStage1 = true;
@@ -79,8 +87,13 @@ public class PliteScripts : MonoBehaviour
             if((id1) && (id2) && !pressedID.Exists(x => x == 6) && !pressedID.Exists(x => x == 9) && !pressedID.Exists(x => x == 10) && !pressedID.Exists(x => x == 11))
             {
                 id1 = false; id2 = false;
-                DialogSystem.message.Add("Что это?");
-                DialogSystem.on = true;
+
+                foreach (var entity in _dialogFilter)
+                {
+                    ref var dialogComponent = ref _dialogPool.Get(entity);
+                    dialogComponent.DialogItem.InputText = "Что это?";
+                    dialogComponent.DialogSystem.StartDialog();
+                }
 
                 correctCode1 = true;
                 nextStage = false;
@@ -109,8 +122,14 @@ public class PliteScripts : MonoBehaviour
             if((id1) && !pressedID.Exists(x => x == 36))
             {
                 id1 = false; id2 = false;
-                DialogSystem.message.Add("Кажется я что-то слышу");
-                DialogSystem.on = true;
+
+                foreach (var entity in _dialogFilter)
+                {
+                    ref var dialogComponent = ref _dialogPool.Get(entity);
+                    dialogComponent.DialogItem.InputText = "Кажется я что-то слышу";
+                    dialogComponent.DialogSystem.StartDialog();
+                }
+
                 correctCode = true;
                 nextStage = false;
                 nextStage1 = true;
@@ -130,8 +149,14 @@ public class PliteScripts : MonoBehaviour
             if((id1) && (id2) && !pressedID.Exists(x => x == 6) && !pressedID.Exists(x => x == 9) && !pressedID.Exists(x => x == 10) && !pressedID.Exists(x => x == 11))
             {
                 id1 = false; id2 = false;
-                DialogSystem.message.Add("Что это?");
-                DialogSystem.on = true;
+
+                foreach (var entity in _dialogFilter)
+                {
+                    ref var dialogComponent = ref _dialogPool.Get(entity);
+                    dialogComponent.DialogItem.InputText = "Что это?";
+                    dialogComponent.DialogSystem.StartDialog();
+                }
+
                 correctCode1 = true;
                 if(nextStage1) electro.SetActive(true);
                 nextStage1 = false;
@@ -157,8 +182,14 @@ public class PliteScripts : MonoBehaviour
             {
                 id3 = false; id4 = false;
                 correctElectroCode = true;
-                DialogSystem.message.Add("Что-то движется сюда");
-                DialogSystem.on = true;
+
+                foreach (var entity in _dialogFilter)
+                {
+                    ref var dialogComponent = ref _dialogPool.Get(entity);
+                    dialogComponent.DialogItem.InputText = "Что-то движется сюда";
+                    dialogComponent.DialogSystem.StartDialog();
+                }
+
                 nextStage2 = false;
                 //pliteID.OnEnable();
             }
@@ -182,8 +213,13 @@ public class PliteScripts : MonoBehaviour
             {
                 id3 = false; id4 = false;
                 correctElectroCode = true;
-                DialogSystem.message.Add("Что-то движется сюда");
-                DialogSystem.on = true;
+
+                foreach (var entity in _dialogFilter)
+                {
+                    ref var dialogComponent = ref _dialogPool.Get(entity);
+                    dialogComponent.DialogItem.InputText = "Что-то движется сюда";
+                    dialogComponent.DialogSystem.StartDialog();
+                }
                 nextStage2 = false;
                 //pliteID.OnEnable();
             }

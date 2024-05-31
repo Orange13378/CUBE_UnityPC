@@ -7,6 +7,7 @@ namespace CubeECS
         public List<Item> Items;
 
         public delegate void OnItemChanged();
+        public OnItemChanged OnItemChangedUICallback;
         public OnItemChanged OnItemChangedCallback;
     }
 }

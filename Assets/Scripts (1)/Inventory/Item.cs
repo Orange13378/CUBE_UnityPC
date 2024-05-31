@@ -16,24 +16,4 @@ public class Item : ScriptableObject {
 	public static bool opened = false;
 
 	[TextArea()] public string text;
-
-	// Called when the item is pressed in the inventory
-	public virtual void Use ()
-	{
-		if(same[same.Count - 1] != id)
-		{
-			if(!DialogSystem.started && !opened)
-			{
-				DialogSystem.message.Add($"{text}");
-				DialogSystem.printText = true;
-			}
-		}
-	}
-
-	// Call this method to remove the item from inventory
-	public void RemoveFromInventory ()
-	{
-		Inventory.instance.Remove(this);
-	}
-
 }

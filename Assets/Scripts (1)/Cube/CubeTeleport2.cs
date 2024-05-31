@@ -52,11 +52,11 @@ public class CubeTeleport2 : MonoBehaviour
         yield return new WaitForSeconds(1f);
         yield return new WaitUntil((() => !dialog2));
         
-        if (DialogSystem.message.Count == 0)
+        /*if (DialogSystem.message.Count == 0)
         {
             DialogSystem.message.Add("Опять меня куда-то переместило");
             DialogSystem.on = true;
-        }
+        }*/
     }
 
     IEnumerator Teleporting()
