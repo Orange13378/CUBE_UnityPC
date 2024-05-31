@@ -15,3 +15,5 @@ MonoBehaviour:
   Id: 0
   Position: {x: -30.5, y: -3.75, z: 0}
   NextWorld: 2
+  DialogText: "\u041D\u0435 \u043D\u0440\u0430\u0432\u0438\u0442\u0441\u044F \u043C\u043D\u0435
+    \u044D\u0442\u043E"

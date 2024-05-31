@@ -8,6 +8,7 @@ namespace CubeECS
     {
         public CinemachineVirtualCamera VirtualCamera;
         public Image WhiteScreenImage;
+        public Image BlackScreenImage;
         public ConfigurationSO Configuration;
         public GameObject DialogPanel;
         public AudioClip[] FootStepsAudioClips;

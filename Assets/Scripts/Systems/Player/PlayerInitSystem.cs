@@ -21,7 +21,7 @@ namespace CubeECS
             _playerInputPool.Value.Add(playerEntity);
 
             var playerGO = GameObject.FindGameObjectWithTag("Player");
-            playerComponent.IsPlayerActive = true;
+            playerComponent.IsPlayerActive = false;
             playerComponent.PlayerSpeed = _gameData.Value.Configuration.PlayerSpeed;
             playerComponent.PlayerTransform = playerGO.transform;
             playerComponent.PlayerCollider = playerGO.GetComponent<BoxCollider2D>();

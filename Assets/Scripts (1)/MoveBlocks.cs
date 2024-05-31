@@ -54,13 +54,13 @@ public class MoveBlocks : MonoBehaviour
         {
             if (pressedE)
             {
-                DisablePlayerScript.off = true;
+                /*DisablePlayerScript.off = true;*/
                 gameObject.GetComponent<SpriteRenderer>().sprite = sprite_goPlite;
                 gameObject.GetComponent<EdgeCollider2D>().enabled = true;
                 gameObject.transform.DOLocalMove(startPos + Vector3.up, 1f, false);
                 player.transform.DOLocalMove(startPos + (player.transform.position - gameObject.transform.position) + Vector3.up, 1f, false);
                 yield return new WaitForSeconds(1f);
-                DisablePlayerScript.on = true;
+                /*DisablePlayerScript.on = true;*/
                 once = true;
                 sprite = true;
                 yield return new WaitUntil((() => MagnitMech.magnit));
@@ -81,7 +81,7 @@ public class MoveBlocks : MonoBehaviour
                     gameObject.GetComponent<EdgeCollider2D>().enabled = false;
                     moved = !moved;
                     pressedE = !pressedE;
-                    DisablePlayerScript.on = true;
+                    /*DisablePlayerScript.on = true;*/
                 }
                 //DisablePlayerScript.on = true;
                 once = true;
@@ -94,7 +94,7 @@ public class MoveBlocks : MonoBehaviour
                 once = true;
                 gameObject.GetComponent<SpriteRenderer>().sprite = sprite_backPlite;
                 gameObject.GetComponent<EdgeCollider2D>().enabled = false;
-                DisablePlayerScript.on = true;
+                /*DisablePlayerScript.on = true;*/
             }
         }
         else
@@ -102,14 +102,14 @@ public class MoveBlocks : MonoBehaviour
             if (pressedE)
             {
                 sprite = true;
-                DisablePlayerScript.off = true;
+                /*DisablePlayerScript.off = true;*/
                 gameObject.GetComponent<SpriteRenderer>().sprite = sprite_goPlite;
                 gameObject.GetComponent<EdgeCollider2D>().enabled = true;
                 gameObject.transform.DOLocalMove(nextPos + Vector3.up, 1f, false);
                 player.transform.DOLocalMove(nextPos + (player.transform.position - gameObject.transform.position) + Vector3.up, 1f, false);
                 yield return new WaitForSeconds(1f);
                 once = true;
-                DisablePlayerScript.on = true;
+                /*DisablePlayerScript.on = true;*/
                 yield return new WaitUntil((() => !MagnitMech.magnit));
                 underPlite1.GetComponent<SpriteRenderer>().sprite = spriteS;
                 underPlite2.GetComponent<SpriteRenderer>().sprite = spriteN;
@@ -128,7 +128,7 @@ public class MoveBlocks : MonoBehaviour
                     gameObject.GetComponent<EdgeCollider2D>().enabled = false;
                     moved = !moved;
                     pressedE = !pressedE;
-                    DisablePlayerScript.on = true;
+                    /*DisablePlayerScript.on = true;*/
                     
                 }
                 //DisablePlayerScript.on = true;
@@ -142,7 +142,7 @@ public class MoveBlocks : MonoBehaviour
                 once = true;
                 gameObject.GetComponent<SpriteRenderer>().sprite = sprite_backPlite;
                 gameObject.GetComponent<EdgeCollider2D>().enabled = false;
-                DisablePlayerScript.on = true;
+                /*DisablePlayerScript.on = true;*/
             }
         }
         

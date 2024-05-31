@@ -1,8 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using CubeECS;
+using Leopotam.EcsLite;
 
 public class CameraZoom : MonoBehaviour
 {
@@ -24,14 +25,20 @@ public class CameraZoom : MonoBehaviour
     public AudioClip steepsSound;
     private AudioSource audioSource;
 
+    private EcsWorld _world;
+    private EcsFilter _dialogFilter;
+    private EcsPool<DialogComponent> _dialogPool;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        scaleChange = new Vector3(-0.0015f, -0.0015f, 0f);
+        scaleChange = new Vector3(-0.0010f, -0.0010f, 0f);
         gameBegin = false;
         zoomed = false;
 
-        DisablePlayerScript.off = true;
+        _world = EcsWorldManager.GetEcsWorld();
+        _dialogFilter = _world.Filter<DialogComponent>().End();
+        _dialogPool = _world.GetPool<DialogComponent>();
     }
 
     void Update()
@@ -100,8 +107,18 @@ public class CameraZoom : MonoBehaviour
         vcam2.SetActive(true);
         gamePanel.SetActive(true);
         yield return new WaitForSeconds(5f);
-        DisablePlayerScript.on = true;
+        StartDialog();
         //vCamera.gameObject.SetActive(false);
         gameObject.SetActive(false);
+    }
+
+    private void StartDialog()
+    {
+        foreach (var entity in _dialogFilter)
+        {
+            ref var dialogComponent = ref _dialogPool.Get(entity);
+            dialogComponent.DialogItem.InputText = "Ãäå ÿ?";
+            dialogComponent.DialogSystem.StartDialog();
+        }
     }
 }

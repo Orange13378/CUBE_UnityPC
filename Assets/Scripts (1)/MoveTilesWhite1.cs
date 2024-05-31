@@ -37,13 +37,13 @@ public class MoveTilesWhite1 : MonoBehaviour
 
     IEnumerator Moving()
     {
-        DisablePlayerScript.off = true;
+        /*DisablePlayerScript.off = true;*/
         gameObject.transform.DOLocalMove(nextPos, 5f, false);
         yield return new WaitForSeconds(0.1f);
-        DisablePlayerScript.antiMouse = true;
+        /*DisablePlayerScript.antiMouse = true;*/
         yield return new WaitForSeconds(5f);
         block.gameObject.SetActive(false);
-        DisablePlayerScript.antiMouse = false;
-        DisablePlayerScript.on = true;
+        /*DisablePlayerScript.antiMouse = false;
+        DisablePlayerScript.on = true;*/
     }
 }

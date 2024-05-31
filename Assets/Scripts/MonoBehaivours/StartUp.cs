@@ -14,6 +14,7 @@ namespace CubeECS
         private IEcsSystems fixedUpdateSystems;
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [SerializeField] private Image whiteScreenImage;
+        [SerializeField] private Image blackScreenImage;
         [SerializeField] private ConfigurationSO configuration;
         [SerializeField] private GameObject player;
         [SerializeField] private GameObject dialogPanel;
@@ -36,6 +37,7 @@ namespace CubeECS
             var gameData = new GameData();
             gameData.VirtualCamera = virtualCamera;
             gameData.WhiteScreenImage = whiteScreenImage;
+            gameData.BlackScreenImage = blackScreenImage;
             gameData.Configuration = configuration;
             gameData.Player = player;
             gameData.DialogPanel = dialogPanel;

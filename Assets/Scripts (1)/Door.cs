@@ -23,14 +23,14 @@ public class Door : MonoBehaviour
         {
             if ((Input.GetKeyDown(KeyCode.E)) && !correct)
             {
-                DisablePlayerScript.off = true;
+                /*DisablePlayerScript.off = true;*/
                 codePanel.SetActive(true);
             }
         }
 
         if (correct & close) 
         {
-            DisablePlayerScript.on = true;
+            /*DisablePlayerScript.on = true;*/
             doorAnim.SetBool("open", true);
             panel.SetActive(false);
             StartCoroutine(Open());
