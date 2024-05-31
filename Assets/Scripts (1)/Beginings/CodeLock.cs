@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class CodeLock : MonoBehaviour
 {
@@ -45,6 +43,7 @@ public class CodeLock : MonoBehaviour
         if (unlock)
         {
 			stone.SetActive(true);
+            unlock = false;
         }
     }
 
@@ -119,16 +118,17 @@ public class CodeLock : MonoBehaviour
 
 	public void EnterPass()
 	{
-		if (_InputField.text == password)
+		/*if (_InputField.text == password)
 		{
 			unlock = true;
 			ClearText();
 			_InputField.placeholder.GetComponent<Text>().text = success;
 			_InputField.placeholder.GetComponent<Text>().color = successColor;
-		}
-		else if(_InputField.text == doorCode)
+		}*/
+		if(_InputField.text == doorCode)
 		{
-			Door.correct = true;
+            stone.SetActive(true);
+            Door.correct = true;
 			ClearText();
 			gameObject.SetActive(false);
 		}
