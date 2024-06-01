@@ -12,6 +12,8 @@ namespace CubeECS
         private IEcsSystems initSystems;
         private IEcsSystems updateSystems;
         private IEcsSystems fixedUpdateSystems;
+        [SerializeField] private FixedJoystick fixedJoystick;
+        [SerializeField] private Button buttonX;
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [SerializeField] private Image whiteScreenImage;
         [SerializeField] private Image blackScreenImage;
@@ -35,6 +37,8 @@ namespace CubeECS
             EcsWorldManager.SetEcsWorld(_world);
 
             var gameData = new GameData();
+            gameData.FixedJoystick = fixedJoystick;
+            gameData.ButtonX = buttonX;
             gameData.VirtualCamera = virtualCamera;
             gameData.WhiteScreenImage = whiteScreenImage;
             gameData.BlackScreenImage = blackScreenImage;
@@ -51,7 +55,6 @@ namespace CubeECS
             gameData.Pedestals = pedestals;
             gameData.PedestalsUI = pedestalsUI;
             gameData.DialogSystem = dialogSystem;
-            //gameData.sceneService = Service<SceneService>.Get(true);
 
             initSystems = new EcsSystems(_world, gameData)
                     .Add(new PlayerInitSystem())

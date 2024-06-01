@@ -1,6 +1,5 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using UnityEngine;
 
 namespace CubeECS
 {
@@ -10,8 +9,10 @@ namespace CubeECS
         private EcsPoolInject<PedestalComponent> _pedestalPool;
         private EcsPoolInject<DisablePlayerComponent> _disablePlayerPool;
         private EcsPoolInject<DialogComponent> _dialogPool;
+        private EcsPoolInject<PlayerInputComponent> _playerInputPool;
         private EcsFilterInject<Inc<DialogComponent>> _dialogFilter;
-        private EcsFilterInject<Inc<PedestalComponent>> _filters;
+        private EcsFilterInject<Inc<PedestalComponent>> _pedestalFilter;
+        private EcsFilterInject<Inc<PlayerInputComponent>> _playerInputFilter;
         private EcsCustomInject<GameData> _gameData;
 
         public void Init(IEcsSystems systems)
@@ -27,13 +28,21 @@ namespace CubeECS
 
         public void Run(IEcsSystems systems)
         {
-            foreach (var entity in _filters.Value)
+            foreach (var playerInputEntity in _playerInputFilter.Value)
             {
-                ref var pedestalCmp = ref _pedestalPool.Value.Get(entity);
+                ref var playerInputComponent = ref _playerInputPool.Value.Get(playerInputEntity);
 
-                if (!pedestalCmp.IsEntered || !Input.GetKeyDown(KeyCode.E))
+                if (!playerInputComponent.PressedX)
                     return;
+            }
 
+            foreach (var pedestalEntity in _pedestalFilter.Value)
+            {
+                ref var pedestalCmp = ref _pedestalPool.Value.Get(pedestalEntity);
+
+                if (!pedestalCmp.IsEntered)
+                    return;
+                
                 pedestalCmp.IsEntered = false;
 
                 if (pedestalCmp.CurrentUI == PedestalWorld.White)

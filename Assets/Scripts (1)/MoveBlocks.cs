@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using CubeECS;
+using Leopotam.EcsLite;
 
 public class MoveBlocks : MonoBehaviour
 {
@@ -11,19 +13,44 @@ public class MoveBlocks : MonoBehaviour
     [SerializeField] private GameObject player, underPlite1, underPlite2;
     [SerializeField] private Sprite sprite_goPlite, sprite_backPlite, spriteN , spriteS;
 
+    private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _underPliteSpriteRenderer;
+    private SpriteRenderer _underPlite2SpriteRenderer;
+    private EdgeCollider2D _edgeCollider;
+
+    private EcsWorld _world;
+    private EcsFilter _playerInputFilter;
+    private EcsPool<PlayerInputComponent> _playerInputPool;
+
     public static bool sprite;
-    void Start()
+    
+    private void Start()
     {
         startPos = gameObject.transform.position;
         moved = true;
         pressedE = false;
         entered = false;
         once = true;
+        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        _underPliteSpriteRenderer = underPlite1.GetComponent<SpriteRenderer>();
+        _underPlite2SpriteRenderer = underPlite2.GetComponent<SpriteRenderer>();
+        _edgeCollider = gameObject.GetComponent<EdgeCollider2D>();
+
+        _world = EcsWorldManager.GetEcsWorld();
+        _playerInputFilter = _world.Filter<PlayerInputComponent>().End();
+        _playerInputPool = _world.GetPool<PlayerInputComponent>();
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && entered && once)
+        foreach (var entity in _playerInputFilter)
+        {
+            ref var playerInputComponent = ref _playerInputPool.Get(entity);
+            if (!playerInputComponent.PressedX)
+                return;
+        }
+
+        if (entered && once)
         {
             StartCoroutine(Plite());
         }
@@ -45,56 +72,49 @@ public class MoveBlocks : MonoBehaviour
         }
     }
 
-    IEnumerator Plite()
+    private IEnumerator Plite()
     {
         once = false;
         pressedE = !pressedE;
-        Debug.Log("Нажата E");
         if(moved)
         {
             if (pressedE)
             {
-                /*DisablePlayerScript.off = true;*/
-                gameObject.GetComponent<SpriteRenderer>().sprite = sprite_goPlite;
-                gameObject.GetComponent<EdgeCollider2D>().enabled = true;
-                gameObject.transform.DOLocalMove(startPos + Vector3.up, 1f, false);
-                player.transform.DOLocalMove(startPos + (player.transform.position - gameObject.transform.position) + Vector3.up, 1f, false);
+                _spriteRenderer.sprite = sprite_goPlite;
+                _edgeCollider.enabled = true;
+                gameObject.transform.DOLocalMove(startPos + Vector3.up, 1f);
+                player.transform.DOLocalMove(startPos + (player.transform.position - gameObject.transform.position) + Vector3.up, 1f);
                 yield return new WaitForSeconds(1f);
-                /*DisablePlayerScript.on = true;*/
                 once = true;
                 sprite = true;
                 yield return new WaitUntil((() => MagnitMech.magnit));
-                underPlite1.GetComponent<SpriteRenderer>().sprite = spriteN;
-                underPlite2.GetComponent<SpriteRenderer>().sprite = spriteS;
-                //Debug.Log($"magnit go - {MagnitMech.magnit}");
+                _underPliteSpriteRenderer.sprite = spriteN;
+                _underPlite2SpriteRenderer.sprite = spriteS;
                 once = false;
                 if (pressedE)
                 {
                     sprite = false;
-                    player.transform.DOLocalMove(nextPos + (player.transform.position - gameObject.transform.position) + Vector3.up, 5f, false);
-                    gameObject.transform.DOLocalMove(nextPos + Vector3.up, 5f, false);
+                    player.transform.DOLocalMove(nextPos + (player.transform.position - gameObject.transform.position) + Vector3.up, 5f);
+                    gameObject.transform.DOLocalMove(nextPos + Vector3.up, 5f);
                     yield return new WaitForSeconds(5f);
-                    gameObject.transform.DOLocalMove(nextPos, 1f, false);
-                    player.transform.DOLocalMove(nextPos + (player.transform.position - gameObject.transform.position), 1f, false);
+                    gameObject.transform.DOLocalMove(nextPos, 1f);
+                    player.transform.DOLocalMove(nextPos + (player.transform.position - gameObject.transform.position), 1f);
                     yield return new WaitForSeconds(1f);
-                    gameObject.GetComponent<SpriteRenderer>().sprite = sprite_backPlite;
-                    gameObject.GetComponent<EdgeCollider2D>().enabled = false;
+                    _spriteRenderer.sprite = sprite_backPlite;
+                    _edgeCollider.enabled = false;
                     moved = !moved;
                     pressedE = !pressedE;
-                    /*DisablePlayerScript.on = true;*/
                 }
-                //DisablePlayerScript.on = true;
                 once = true;
             }
             else 
             {
-                player.transform.DOLocalMove(startPos + (player.transform.position - gameObject.transform.position), 1f, false);
-                gameObject.transform.DOLocalMove(startPos, 1f, false);
+                player.transform.DOLocalMove(startPos + (player.transform.position - gameObject.transform.position), 1f);
+                gameObject.transform.DOLocalMove(startPos, 1f);
                 yield return new WaitForSeconds(1f);
                 once = true;
-                gameObject.GetComponent<SpriteRenderer>().sprite = sprite_backPlite;
-                gameObject.GetComponent<EdgeCollider2D>().enabled = false;
-                /*DisablePlayerScript.on = true;*/
+                _spriteRenderer.sprite = sprite_backPlite;
+                _edgeCollider.enabled = false;
             }
         }
         else
@@ -102,47 +122,41 @@ public class MoveBlocks : MonoBehaviour
             if (pressedE)
             {
                 sprite = true;
-                /*DisablePlayerScript.off = true;*/
-                gameObject.GetComponent<SpriteRenderer>().sprite = sprite_goPlite;
-                gameObject.GetComponent<EdgeCollider2D>().enabled = true;
-                gameObject.transform.DOLocalMove(nextPos + Vector3.up, 1f, false);
-                player.transform.DOLocalMove(nextPos + (player.transform.position - gameObject.transform.position) + Vector3.up, 1f, false);
+                _spriteRenderer.sprite = sprite_goPlite;
+                _edgeCollider.enabled = true;
+                gameObject.transform.DOLocalMove(nextPos + Vector3.up, 1f);
+                player.transform.DOLocalMove(nextPos + (player.transform.position - gameObject.transform.position) + Vector3.up, 1f);
                 yield return new WaitForSeconds(1f);
                 once = true;
-                /*DisablePlayerScript.on = true;*/
                 yield return new WaitUntil((() => !MagnitMech.magnit));
-                underPlite1.GetComponent<SpriteRenderer>().sprite = spriteS;
-                underPlite2.GetComponent<SpriteRenderer>().sprite = spriteN;
+                _underPliteSpriteRenderer.sprite = spriteS;
+                _underPlite2SpriteRenderer.sprite = spriteN;
                 sprite = false;
-                //Debug.Log($"magnit back - {MagnitMech.magnit}");
                 once = false;
                 if (pressedE)
                 {
-                    player.transform.DOLocalMove(startPos + (player.transform.position  - gameObject.transform.position + Vector3.up), 5f, false);
-                    gameObject.transform.DOLocalMove(startPos + Vector3.up, 5f, false);
+                    player.transform.DOLocalMove(startPos + (player.transform.position  - gameObject.transform.position + Vector3.up), 5f);
+                    gameObject.transform.DOLocalMove(startPos + Vector3.up, 5f);
                     yield return new WaitForSeconds(5f);
-                    gameObject.transform.DOLocalMove(startPos, 1f, false);
-                    player.transform.DOLocalMove(startPos + (player.transform.position - gameObject.transform.position), 1f, false);
+                    gameObject.transform.DOLocalMove(startPos, 1f);
+                    player.transform.DOLocalMove(startPos + (player.transform.position - gameObject.transform.position), 1f);
                     yield return new WaitForSeconds(1f);
-                    gameObject.GetComponent<SpriteRenderer>().sprite = sprite_backPlite;
-                    gameObject.GetComponent<EdgeCollider2D>().enabled = false;
+                    _spriteRenderer.sprite = sprite_backPlite;
+                    _edgeCollider.enabled = false;
                     moved = !moved;
                     pressedE = !pressedE;
-                    /*DisablePlayerScript.on = true;*/
                     
                 }
-                //DisablePlayerScript.on = true;
                 once = true;
             }
             else 
             {
-                player.transform.DOLocalMove(nextPos + (player.transform.position - gameObject.transform.position), 1f, false);
-                gameObject.transform.DOLocalMove(nextPos, 1f, false);
+                player.transform.DOLocalMove(nextPos + (player.transform.position - gameObject.transform.position), 1f);
+                gameObject.transform.DOLocalMove(nextPos, 1f);
                 yield return new WaitForSeconds(1f);
                 once = true;
-                gameObject.GetComponent<SpriteRenderer>().sprite = sprite_backPlite;
-                gameObject.GetComponent<EdgeCollider2D>().enabled = false;
-                /*DisablePlayerScript.on = true;*/
+                _spriteRenderer.sprite = sprite_backPlite;
+                _edgeCollider.enabled = false;
             }
         }
         

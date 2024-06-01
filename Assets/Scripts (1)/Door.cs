@@ -1,5 +1,6 @@
+using CubeECS;
+using Leopotam.EcsLite;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : MonoBehaviour
@@ -8,29 +9,35 @@ public class Door : MonoBehaviour
     public GameObject door, codePanel, panel;
     private bool entered, close;
 
+    private EcsFilter _playerInputFilter;
+    private EcsPool<PlayerInputComponent> _playerInputPool;
+
     [System.NonSerialized] public static bool correct;
     void Start()
     {
         correct = false;
         entered = false;
         close = true;
+
+        var world = EcsWorldManager.GetEcsWorld();
+        _playerInputFilter = world.Filter<PlayerInputComponent>().End();
+        _playerInputPool = world.GetPool<PlayerInputComponent>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (entered)
         {
-            if ((Input.GetKeyDown(KeyCode.E)) && !correct)
+            foreach (var entity in _playerInputFilter)
             {
-                /*DisablePlayerScript.off = true;*/
-                codePanel.SetActive(true);
+                ref var playerInputComponent = ref _playerInputPool.Get(entity);
+                if (playerInputComponent.PressedX && !correct)
+                    codePanel.SetActive(true);
             }
         }
 
         if (correct & close) 
         {
-            /*DisablePlayerScript.on = true;*/
             doorAnim.SetBool("open", true);
             panel.SetActive(false);
             StartCoroutine(Open());
@@ -41,23 +48,19 @@ public class Door : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
-        {
             entered = true;
-        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
-        {
             entered = false;
-        }
     }
 
     IEnumerator Open()
     {
         yield return new WaitForSeconds(4f);
         door.GetComponent<BoxCollider2D>().enabled = false;
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

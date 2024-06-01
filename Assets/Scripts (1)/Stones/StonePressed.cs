@@ -1,69 +1,75 @@
-using System.Collections;
-using System.Collections.Generic;
+using CubeECS;
+using Leopotam.EcsLite;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class StonePressed : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Stones stone;
 
-    [System.NonSerialized] public static bool pressedE = false;
-    bool entered;
+    [System.NonSerialized] public static bool pressedE;
+    private bool _isEntered;
 
-    
+    private SpriteRenderer _spriteRenderer;
+
+    private EcsFilter _playerInputFilter;
+    private EcsPool<PlayerInputComponent> _playerInputPool;
+
     private void Start()
     {
-        entered = false;
+        _isEntered = false;
+        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
+        var world = EcsWorldManager.GetEcsWorld();
+        _playerInputFilter = world.Filter<PlayerInputComponent>().End();
+        _playerInputPool = world.GetPool<PlayerInputComponent>();
     }
 
     private void Update()
     {
-
         if (ElectroMech.switched && !ElectroMech.electro) 
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = stone.icon;
+            _spriteRenderer.sprite = stone.icon;
             ElectroMech.switched = false;
         }
 
         if (ElectroMech.switched && ElectroMech.electro)
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = stone.newIcon;
+            _spriteRenderer.sprite = stone.newIcon;
             ElectroMech.switched = false;
         }
 
-        if (entered)
+        if (!_isEntered) return;
+
+        foreach (var entity in _playerInputFilter)
         {
-            if((Input.GetKeyDown(KeyCode.E)))
-            {
-                pressedE = false;
-                if (ElectroMech.electro == false && !pressedE)
-                {
-                    StoneScript.instance.GetText(stone);
-                    pressedE = true;
-                }
-                else if (ElectroMech.electro == true && !pressedE)
-                {
-                    StoneScript.instance.GetElectroText(stone);
-                    pressedE = true;
-                }
-            }
+            ref var playerInputComponent = ref _playerInputPool.Get(entity);
+            if (!playerInputComponent.PressedX)
+                return;
+        }
+            
+        pressedE = false;
+
+        if (ElectroMech.electro == false && !pressedE)
+        {
+            StoneScript.instance.GetText(stone);
+            pressedE = true;
+        }
+        else if (ElectroMech.electro == true && !pressedE)
+        {
+            StoneScript.instance.GetElectroText(stone);
+            pressedE = true;
         }
     }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
-        {
-            entered = true;
-        }
+        if (other.CompareTag("Player"))
+            _isEntered = true;
     }
 
      private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
-        {
-            entered = false;
-        }
+        if (other.CompareTag("Player"))
+            _isEntered = false;
     }
 }

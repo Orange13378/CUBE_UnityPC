@@ -13,15 +13,18 @@ namespace CubeECS
         private EcsFilter _pedestalFilter;
         private EcsFilter _imageFilter;
         private EcsFilter _dialogFilter;
+        private EcsFilter _playerInputFilter;
         private EcsPool<CubeComponent> _cubePool;
         private EcsPool<PedestalComponent> _pedestalPool;
         private EcsPool<WhiteImageComponent> _imagePool;
         private EcsPool<DialogComponent> _dialogPool;
         private EcsPool<DisablePlayerComponent> _disablePlayerPool;
+        private EcsPool<PlayerInputComponent> _playerInputPool;
         private CubeComponent _cube;
         private PedestalComponent _pedestal;
 
         private bool _isActivated;
+        private bool _isEntered;
 
         private void Start()
         {
@@ -30,29 +33,32 @@ namespace CubeECS
             _dialogFilter = _world.Filter<DialogComponent>().End();
             _pedestalFilter = _world.Filter<PedestalComponent>().End();
             _imageFilter = _world.Filter<WhiteImageComponent>().End();
+            _playerInputFilter = _world.Filter<PlayerInputComponent>().End();
             _cubePool = _world.GetPool<CubeComponent>();
             _dialogPool = _world.GetPool<DialogComponent>();
             _imagePool = _world.GetPool<WhiteImageComponent>();
             _pedestalPool = _world.GetPool<PedestalComponent>();
             _disablePlayerPool = _world.GetPool<DisablePlayerComponent>();
+            _playerInputPool = _world.GetPool<PlayerInputComponent>();
         }
 
-        private void OnTriggerStay2D(Collider2D other)
+        private void Update()
         {
-            if (_isActivated || !other.CompareTag("Player") || !Input.GetKey(KeyCode.E))
+            if (!_isEntered || _isActivated)
                 return;
 
-            _isActivated = true;
-
-            if (cubeItem.NextWorld == PedestalWorld.Black)
+            foreach (var entity in _playerInputFilter)
             {
-                // TODO черный свет
+                ref var playerInputComponent = ref _playerInputPool.Get(entity);
+                if (!playerInputComponent.PressedX)
+                    return;
             }
+
+            _isActivated = true;
 
             foreach (var entity in _cubeFilter)
             {
                 ref var cubeComponent = ref _cubePool.Get(entity);
-
                 _cube = cubeComponent;
             }
 
@@ -67,7 +73,23 @@ namespace CubeECS
             StartCoroutine(Interact());
         }
 
-        IEnumerator Interact()
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!other.CompareTag("Player"))
+                return;
+
+            _isEntered = true;
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (!other.CompareTag("Player"))
+                return;
+
+            _isEntered = false;
+        }
+
+        private IEnumerator Interact()
         {
             DisablePlayer();
             StartShakeCamera();

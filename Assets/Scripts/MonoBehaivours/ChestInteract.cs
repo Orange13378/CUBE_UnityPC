@@ -9,39 +9,67 @@ namespace CubeECS
         [SerializeField] public ChestItem chestItem;
         [SerializeField] public GameObject openedItem;
 
-        private EcsFilter _filter;
+        private EcsFilter _playerInputFilter;
+        private EcsFilter _chestFilter;
         private EcsPool<ChestComponent> _chestPool;
-        private EcsWorld _world;
+        private EcsPool<PlayerInputComponent> _playerInputPool;
 
+        private bool _isEntered;
 
         private void Start()
         {
-            _world = EcsWorldManager.GetEcsWorld();
-            _filter = _world.Filter<ChestComponent>().End();
-            _chestPool = _world.GetPool<ChestComponent>();
+            var world = EcsWorldManager.GetEcsWorld();
+            _chestFilter = world.Filter<ChestComponent>().End();
+            _playerInputFilter = world.Filter<PlayerInputComponent>().End();
+            _chestPool = world.GetPool<ChestComponent>();
+            _playerInputPool = world.GetPool<PlayerInputComponent>();
 
             chestItem.IsOpened = false;
             chestItem.IsUsed = false;
         }
 
-        private void OnTriggerStay2D(Collider2D other)
+        private void Update()
         {
-            if (other.CompareTag("Player") && Input.GetKey(KeyCode.E))
+            if (!_isEntered)
+                return;
+
+            foreach (var entity in _playerInputFilter)
             {
-                foreach (var entity in _filter)
+                ref var playerInputComponent = ref _playerInputPool.Get(entity);
+                if (!playerInputComponent.PressedX)
+                    return;
+            }
+
+            foreach (var entity in _chestFilter)
+            {
+                ref var chestComponent = ref _chestPool.Get(entity);
+
+                if (chestComponent.Items.FirstOrDefault(x => x.Id == chestItem.Id && x.IsUsed) != null)
+                    return;
+
+                if (!chestComponent.Items.Contains(chestItem))
                 {
-                    ref var chestComponent = ref _chestPool.Get(entity);
-
-                    if (chestComponent.Items.FirstOrDefault(x => x.Id == chestItem.Id && x.IsUsed) != null)
-                        return;
-
-                    if (!chestComponent.Items.Contains(chestItem))
-                    {
-                        chestComponent.Items.Add(chestItem);
-                        chestComponent.CurrentOpenedItem = openedItem;
-                    }
+                    chestComponent.Items.Add(chestItem);
+                    chestComponent.CurrentOpenedItem = openedItem;
+                    _isEntered = false;
                 }
             }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!other.CompareTag("Player"))
+                return;
+
+            _isEntered = true;
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (!other.CompareTag("Player"))
+                return;
+
+            _isEntered = false;
         }
     }
 }

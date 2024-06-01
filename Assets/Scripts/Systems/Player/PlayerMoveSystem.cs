@@ -31,7 +31,6 @@ namespace CubeECS
                                                       playerInputComponent.MoveInput * playerComponent.PlayerSpeed *
                                                       Time.fixedDeltaTime);
             }
-
         }
     }
 }

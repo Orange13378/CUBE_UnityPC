@@ -7,41 +7,39 @@ using Leopotam.EcsLite;
 
 public class CameraZoom : MonoBehaviour
 {
-    public Camera cam;
-    [SerializeField] CinemachineVirtualCamera vCamera;
-    //public float maxZoom;
-    //public float minZoom;
-    public float speed =30;
-    //float targetZoom;
+    [SerializeField] 
+    CinemachineVirtualCamera vCamera;
 
-    private Vector3 scaleChange;
+    [System.NonSerialized] 
+    public static bool zoomed;
 
-    bool gameBegin, played;
-    [System.NonSerialized] public static bool zoomed;
+    [SerializeField] 
+    private GameObject mainMenu, player, cube, vcam1, vcam2, gamePanel;
 
-    [SerializeField] private GameObject mainMenu, player, cube, vcam1, vcam2, gamePanel;
-    [SerializeField] private Image image;
+    [SerializeField] 
+    private Image image;
 
     public AudioClip steepsSound;
     private AudioSource audioSource;
+    private bool gameBegin, played;
+    private Vector3 scaleChange;
 
-    private EcsWorld _world;
     private EcsFilter _dialogFilter;
     private EcsPool<DialogComponent> _dialogPool;
 
-    void Start()
+    private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         scaleChange = new Vector3(-0.0010f, -0.0010f, 0f);
         gameBegin = false;
         zoomed = false;
 
-        _world = EcsWorldManager.GetEcsWorld();
-        _dialogFilter = _world.Filter<DialogComponent>().End();
-        _dialogPool = _world.GetPool<DialogComponent>();
+        var world = EcsWorldManager.GetEcsWorld();
+        _dialogFilter = world.Filter<DialogComponent>().End();
+        _dialogPool = world.GetPool<DialogComponent>();
     }
 
-    void Update()
+    private void Update()
     {
         if (gameBegin)
         {
@@ -78,28 +76,23 @@ public class CameraZoom : MonoBehaviour
         audioSource.Play();
     }
 
-    IEnumerator GameBegin()
+    private IEnumerator GameBegin()
     {
         yield return new WaitForSeconds(1f);
         cube.transform.localScale += scaleChange;
         mainMenu.SetActive(false);
-        //targetZoom = Mathf.Clamp(targetZoom, maxZoom, minZoom);
-        //float newSize = Mathf.MoveTowards(cam.orthographicSize, targetZoom, speed * Time.deltaTime);
-        //cam.orthographicSize = newSize;
         yield return new WaitForSeconds(5f);
         zoomed = true;
-        //cam.gameObject.GetComponent<CameraControl>().enabled = true;
     }
 
-    IEnumerator PickedCube()
+    private IEnumerator PickedCube()
     {
         image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + 0.25f * Time.deltaTime);
         yield return new WaitForSeconds(5f);
         CinemachineBegin.touch = false;
         played = true;
-        //image.gameObject.SetActive(false);
     }
-    IEnumerator StartGame()
+    private IEnumerator StartGame()
     {
         image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - 0.25f * Time.deltaTime);
         vCamera.Follow = player.transform;
@@ -108,7 +101,6 @@ public class CameraZoom : MonoBehaviour
         gamePanel.SetActive(true);
         yield return new WaitForSeconds(5f);
         StartDialog();
-        //vCamera.gameObject.SetActive(false);
         gameObject.SetActive(false);
     }
 

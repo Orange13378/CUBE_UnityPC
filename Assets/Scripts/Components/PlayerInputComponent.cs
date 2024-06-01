@@ -5,5 +5,6 @@ namespace CubeECS
     public struct PlayerInputComponent
     {
         public Vector2 MoveInput;
+        public bool PressedX;
     }
 }

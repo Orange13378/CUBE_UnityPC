@@ -225,26 +225,3 @@ public class Inventory : MonoBehaviour {
     }
 
 }
-
-public struct ChestSpriteComponent
-{
-    //WhiteChest, BlueChest, OrangeChest, GreenChest, PurpleChest, BlackChest;
-    public Sprite[] OpenChestSprites;
-    public bool[] UsedChests;
-}
-
-public class PickUpItemSystem : IEcsInitSystem, IEcsRunSystem
-{
-    public void Init(IEcsSystems systems)
-    {
-        var ecsWorld = systems.GetWorld();
-        var gameData = systems.GetShared<GameData>();
-
-
-    }
-
-    public void Run(IEcsSystems systems)
-    {
-
-    }
-}

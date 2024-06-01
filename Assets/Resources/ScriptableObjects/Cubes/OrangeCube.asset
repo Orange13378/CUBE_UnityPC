@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdae0fdb0e133284fa7169192c52a10e, type: 3}
   m_Name: OrangeCube
   m_EditorClassIdentifier: 
-  Id: 0
+  Id: 3
   Position: {x: -30.5, y: -3.75, z: 0}
   NextWorld: 2
   DialogText: "\u041D\u0435 \u043D\u0440\u0430\u0432\u0438\u0442\u0441\u044F \u043C\u043D\u0435

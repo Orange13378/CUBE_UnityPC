@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdae0fdb0e133284fa7169192c52a10e, type: 3}
   m_Name: BlackCube
   m_EditorClassIdentifier: 
-  Id: 0
+  Id: 5
   Position: {x: -15, y: -8, z: 0}
   NextWorld: 5
   DialogText: "\u041F\u043E\u0447\u0435\u043C\u0443 \u0442\u0443\u0442 \u0442\u0430\u043A

@@ -1,28 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
 public class MoveTilesWhite1 : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] private GameObject block;
 
-    [SerializeField] Vector3 nextPos = new Vector3();
+    [SerializeField] Vector3 nextPos = new ();
 
-    bool stoped, stoped1;
-    void Start()
+    private bool stoped, stoped1;
+    private void Start()
     {
         stoped = false;
         stoped1 = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (PliteScripts.correctCode && !stoped)
         {
-            //StartCoroutine(Moving());
             stoped = true;
         }
 
@@ -31,19 +27,13 @@ public class MoveTilesWhite1 : MonoBehaviour
             StartCoroutine(Moving());
             stoped1 = true;
         }
-
-
     }
 
-    IEnumerator Moving()
+    private IEnumerator Moving()
     {
-        /*DisablePlayerScript.off = true;*/
         gameObject.transform.DOLocalMove(nextPos, 5f, false);
         yield return new WaitForSeconds(0.1f);
-        /*DisablePlayerScript.antiMouse = true;*/
         yield return new WaitForSeconds(5f);
         block.gameObject.SetActive(false);
-        /*DisablePlayerScript.antiMouse = false;
-        DisablePlayerScript.on = true;*/
     }
 }

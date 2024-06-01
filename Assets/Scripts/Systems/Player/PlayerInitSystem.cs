@@ -20,7 +20,7 @@ namespace CubeECS
             ref var playerComponent = ref _playerPool.Value.Get(playerEntity);
             _playerInputPool.Value.Add(playerEntity);
 
-            var playerGO = GameObject.FindGameObjectWithTag("Player");
+            var playerGO = _gameData.Value.Player;
             playerComponent.IsPlayerActive = false;
             playerComponent.PlayerSpeed = _gameData.Value.Configuration.PlayerSpeed;
             playerComponent.PlayerTransform = playerGO.transform;

@@ -6,6 +6,8 @@ namespace CubeECS
 {
     public class GameData
     {
+        public FixedJoystick FixedJoystick;
+        public Button ButtonX;
         public CinemachineVirtualCamera VirtualCamera;
         public Image WhiteScreenImage;
         public Image BlackScreenImage;
