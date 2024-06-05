@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Leopotam.EcsLite;
 using UnityEngine;
 using UnityEngine.UI;
-using CubeECS;
 
 public class Inventory : MonoBehaviour {
 

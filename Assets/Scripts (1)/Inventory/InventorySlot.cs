@@ -1,5 +1,4 @@
-using CubeECS;
-using Leopotam.EcsLite;
+using CubeMVC;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,14 +8,13 @@ public class InventorySlot : MonoBehaviour {
 
 	private Item _item;
 
-	private EcsFilter _dialogFilter;
-	private EcsPool<DialogComponent> _dialogPool;
+	private ContextProvider _contextProvider;
+	private DialogModel _dialogModel;
 
     private void Start()
     {
-        var ecsWorld = EcsWorldManager.GetEcsWorld();
-        _dialogFilter = ecsWorld.Filter<DialogComponent>().End();
-        _dialogPool = ecsWorld.GetPool<DialogComponent>();
+        _contextProvider = FindObjectOfType<ContextProvider>();
+        _dialogModel = _contextProvider.GetContext().DialogModel;
     }
 
     public void AddItem(Item newItem)
@@ -39,12 +37,8 @@ public class InventorySlot : MonoBehaviour {
 	{
 		if (_item != null)
 		{
-            foreach (var entity in _dialogFilter)
-            {
-                ref var dialogComponent = ref _dialogPool.Get(entity);
-                dialogComponent.DialogItem.InputText = _item.text;
-                dialogComponent.DialogSystem.StartDialog();
-            }
+            _dialogModel.InputText = _item.text;
+            _dialogModel.OnDialogStart?.Invoke();
         }
-	}
+    }
 }

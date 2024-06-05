@@ -93,12 +93,12 @@ namespace CubeECS
 
         private void Update()
         {
-            updateSystems?.Run();
+            //updateSystems?.Run();
         }
 
         private void FixedUpdate()
         {
-            fixedUpdateSystems?.Run();
+            //fixedUpdateSystems?.Run();
         }
 
         private void OnDestroy()
