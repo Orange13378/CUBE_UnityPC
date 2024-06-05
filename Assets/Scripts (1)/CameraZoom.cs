@@ -2,8 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
-using CubeECS;
-using Leopotam.EcsLite;
+using CubeMVC;
 
 public class CameraZoom : MonoBehaviour
 {
@@ -20,66 +19,62 @@ public class CameraZoom : MonoBehaviour
     private Image image;
 
     public AudioClip steepsSound;
-    private AudioSource audioSource;
-    private bool gameBegin, played;
-    private Vector3 scaleChange;
+    private AudioSource _audioSource;
+    private bool _gameBegin, _played;
+    private Vector3 _scaleChange;
 
-    private EcsFilter _dialogFilter;
-    private EcsPool<DialogComponent> _dialogPool;
+    [SerializeField]
+    private ContextProvider _contextProvider;
+    private DialogModel _dialogModel;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        scaleChange = new Vector3(-0.0010f, -0.0010f, 0f);
-        gameBegin = false;
+        _audioSource = GetComponent<AudioSource>();
+        _scaleChange = new Vector3(-0.0010f, -0.0010f, 0f);
+        _gameBegin = false;
         zoomed = false;
 
-        var world = EcsWorldManager.GetEcsWorld();
-        _dialogFilter = world.Filter<DialogComponent>().End();
-        _dialogPool = world.GetPool<DialogComponent>();
+        _dialogModel = _contextProvider.GetContext().DialogModel;
     }
 
     private void Update()
     {
-        if (gameBegin)
+        if (!_gameBegin) return;
+
+        if(!zoomed) 
         {
-            if(!zoomed) 
-            {
-                StartCoroutine(GameBegin());
-            }
-            else if (CinemachineBegin.touch) 
-            {
-                audioSource.Stop();
-                vCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1f;
-                vCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1f;
-                StartCoroutine(PickedCube());
-            }
-            else if (!CinemachineBegin.touch && played)
-            {
-                vCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0f;
-                vCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0f;
-                StartCoroutine(StartGame());
-            }
+            StartCoroutine(GameBegin());
         }
-        else return;
-        
+        else if (CinemachineBegin.touch) 
+        {
+            _audioSource.Stop();
+            vCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1f;
+            vCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 1f;
+            StartCoroutine(PickedCube());
+        }
+        else if (!CinemachineBegin.touch && _played)
+        {
+            vCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0f;
+            vCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0f;
+            StartCoroutine(StartGame());
+        }
     }
 
     public void NewGame()
     {
-        gameBegin = true;
+        _gameBegin = true;
     }
 
     public void Sound()
     {
-        audioSource.clip = steepsSound;
-        audioSource.Play();
+        _audioSource.clip = steepsSound;
+        _audioSource.Play();
     }
 
     private IEnumerator GameBegin()
     {
         yield return new WaitForSeconds(1f);
-        cube.transform.localScale += scaleChange;
+        cube.transform.localScale += _scaleChange;
         mainMenu.SetActive(false);
         yield return new WaitForSeconds(5f);
         zoomed = true;
@@ -90,7 +85,7 @@ public class CameraZoom : MonoBehaviour
         image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + 0.25f * Time.deltaTime);
         yield return new WaitForSeconds(5f);
         CinemachineBegin.touch = false;
-        played = true;
+        _played = true;
     }
     private IEnumerator StartGame()
     {
@@ -106,11 +101,6 @@ public class CameraZoom : MonoBehaviour
 
     private void StartDialog()
     {
-        foreach (var entity in _dialogFilter)
-        {
-            ref var dialogComponent = ref _dialogPool.Get(entity);
-            dialogComponent.DialogItem.InputText = "√де €?";
-            dialogComponent.DialogSystem.StartDialog();
-        }
+        _dialogModel.OnDialogStart("√де это €?");
     }
 }

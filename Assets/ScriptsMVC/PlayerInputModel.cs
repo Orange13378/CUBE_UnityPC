@@ -10,7 +10,7 @@ namespace CubeMVC
         public ReactiveProperty<bool> PressedX { get; } = new(false);
         public ReactiveProperty<Vector2> CurrentPosition { get; } = new(new (-29.9699993f, -4.44000006f));
 
-        public ReactiveProperty<bool> IsPlayerActive { get; } = new(true);
+        public ReactiveProperty<bool> IsPlayerActive { get; } = new(false);
 
         public void UpdateInput(float x, float y)
         {

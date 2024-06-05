@@ -1,6 +1,4 @@
-using CubeECS;
 using CubeMVC;
-using Leopotam.EcsLite;
 using UnityEngine;
 
 public class StoneScript : MonoBehaviour

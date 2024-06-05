@@ -1,5 +1,3 @@
-using CubeECS;
-using Leopotam.EcsLite;
 using System.Collections;
 using CubeMVC;
 using UnityEngine;
