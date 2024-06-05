@@ -1,11 +1,10 @@
 using CubeECS;
+using CubeMVC;
 using Leopotam.EcsLite;
 using UnityEngine;
 
 public class StoneScript : MonoBehaviour
 {
-    public GameObject diaolog;
-
     #region Singleton
 
 	public static StoneScript instance;
@@ -17,33 +16,23 @@ public class StoneScript : MonoBehaviour
 
     #endregion
 
-    private EcsFilter _dialogFilter;
-    private EcsPool<DialogComponent> _dialogPool;
+    private DialogModel _dialogModel;
+
+    [SerializeField]
+    private ContextProvider _contextProvider;
 
     private void Start()
     {
-        var ecsWorld = EcsWorldManager.GetEcsWorld();
-        _dialogFilter = ecsWorld.Filter<DialogComponent>().End();
-        _dialogPool = ecsWorld.GetPool<DialogComponent>();
+        _dialogModel = _contextProvider.GetContext().DialogModel;
     }
 
     public void GetText(Stones stoneID)
     {
-        foreach (var entity in _dialogFilter)
-        {
-            ref var dialogComponent = ref _dialogPool.Get(entity);
-            dialogComponent.DialogItem.InputText = stoneID.text;
-            dialogComponent.DialogSystem.StartDialog();
-        }
+        _dialogModel.OnDialogStart(stoneID.text);
     }
 
     public void GetElectroText(Stones stoneID)
     {
-        foreach (var entity in _dialogFilter)
-        {
-            ref var dialogComponent = ref _dialogPool.Get(entity);
-            dialogComponent.DialogItem.InputText = stoneID.electroText;
-            dialogComponent.DialogSystem.StartDialog();
-        }
+        _dialogModel.OnDialogStart(stoneID.electroText);
     }
 }

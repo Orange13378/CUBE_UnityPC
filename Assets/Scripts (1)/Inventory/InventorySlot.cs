@@ -37,8 +37,7 @@ public class InventorySlot : MonoBehaviour {
 	{
 		if (_item != null)
 		{
-            _dialogModel.InputText = _item.text;
-            _dialogModel.OnDialogStart?.Invoke();
+            _dialogModel.OnDialogStart?.Invoke(_item.text);
         }
     }
 }

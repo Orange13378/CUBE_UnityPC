@@ -1,4 +1,3 @@
-using Leopotam.EcsLite;
 using UnityEngine;
 
 namespace CubeMVC

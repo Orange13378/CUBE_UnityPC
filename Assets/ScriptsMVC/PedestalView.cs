@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CubeMVC
 {
-    public class PedestalMonoUI : MonoBehaviour
+    public class PedestalView : MonoBehaviour
     {
         [SerializeField]
         private ContextProvider _contextProvider;
@@ -15,6 +15,7 @@ namespace CubeMVC
         private void Start()
         {
             _pedestalModel = _contextProvider.GetContext().PedestalModel;
+            _inputModel = _contextProvider.GetContext().PlayerInputModel;
             _pedestalModel.OnInteractedCallback += ChangePedestalView;
             _pedestalSprite = _pedestalModel.PedestalGO.GetComponent<SpriteRenderer>();
             _pedestalCubeSprite = _pedestalModel.PedestalCubeGO.GetComponent<SpriteRenderer>();
@@ -40,10 +41,7 @@ namespace CubeMVC
             _pedestalModel.Worlds[currentWorldIndex].SetActive(true);
             _pedestalModel.PedestalsUI[currentUIIndex].SetActive(false);
 
-            // Disable Player
-
-            /*var disablePlayer = _ecsWorld.NewEntity();
-            _disablePlayerPool.Add(disablePlayer).Deactivate = false;*/
+            _inputModel.IsPlayerActive.Value = true;
         }
 
         private void SetCurrentWorld(PedestalWorld currentWorld)

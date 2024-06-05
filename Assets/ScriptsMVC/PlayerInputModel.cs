@@ -18,4 +18,14 @@ namespace CubeMVC
             Y.Value = y;
         }
     }
+
+    public class PlayerAnimationModel
+    {
+        public Animator Animator { get; set; }
+
+        public PlayerAnimationModel(Animator animator)
+        {
+            Animator = animator;
+        }
+    }
 }

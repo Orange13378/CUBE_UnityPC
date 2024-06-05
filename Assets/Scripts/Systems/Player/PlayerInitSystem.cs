@@ -24,7 +24,6 @@ namespace CubeECS
             playerComponent.IsPlayerActive = false;
             playerComponent.PlayerSpeed = _gameData.Value.Configuration.PlayerSpeed;
             playerComponent.PlayerTransform = playerGO.transform;
-            playerComponent.PlayerCollider = playerGO.GetComponent<BoxCollider2D>();
             playerComponent.PlayerRB = playerGO.GetComponent<Rigidbody2D>();
             playerComponent.PlayerAudioSource = playerGO.GetComponentInChildren<AudioSource>();
             playerComponent.PlayerAnimator = playerGO.GetComponentInChildren<Animator>();

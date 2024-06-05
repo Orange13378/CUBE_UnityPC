@@ -1,27 +1,26 @@
-using CubeECS;
-using Leopotam.EcsLite;
+using CubeMVC;
 using UnityEngine;
 
 public class StonePressed : MonoBehaviour
 {
     public Stones stone;
 
+    [SerializeField]
+    private ContextProvider _contextProvider;
+
+    private PlayerInputModel _inputModel;
+
     [System.NonSerialized] public static bool pressedE;
     private bool _isEntered;
 
     private SpriteRenderer _spriteRenderer;
 
-    private EcsFilter _playerInputFilter;
-    private EcsPool<PlayerInputComponent> _playerInputPool;
-
     private void Start()
     {
+        _inputModel = _contextProvider.GetContext().PlayerInputModel;
+
         _isEntered = false;
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-
-        var world = EcsWorldManager.GetEcsWorld();
-        _playerInputFilter = world.Filter<PlayerInputComponent>().End();
-        _playerInputPool = world.GetPool<PlayerInputComponent>();
     }
 
     private void Update()
@@ -38,14 +37,8 @@ public class StonePressed : MonoBehaviour
             ElectroMech.switched = false;
         }
 
-        if (!_isEntered) return;
-
-        foreach (var entity in _playerInputFilter)
-        {
-            ref var playerInputComponent = ref _playerInputPool.Get(entity);
-            if (!playerInputComponent.PressedX)
-                return;
-        }
+        if (!_isEntered || !_inputModel.PressedX.Value) 
+            return;
             
         pressedE = false;
 

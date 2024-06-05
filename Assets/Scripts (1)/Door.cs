@@ -1,39 +1,37 @@
 using CubeECS;
 using Leopotam.EcsLite;
 using System.Collections;
+using CubeMVC;
 using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public Animator doorAnim;
-    public GameObject door, codePanel, panel;
+    [SerializeField]
+    private Animator doorAnim;
+    [SerializeField]
+    private GameObject door, codePanel, panel;
     private bool entered, close;
 
-    private EcsFilter _playerInputFilter;
-    private EcsPool<PlayerInputComponent> _playerInputPool;
+    [SerializeField]
+    private ContextProvider _contextProvider;
+    private PlayerInputModel _inputModel;
 
     [System.NonSerialized] public static bool correct;
-    void Start()
+    private void Start()
     {
         correct = false;
         entered = false;
         close = true;
 
-        var world = EcsWorldManager.GetEcsWorld();
-        _playerInputFilter = world.Filter<PlayerInputComponent>().End();
-        _playerInputPool = world.GetPool<PlayerInputComponent>();
+        _inputModel = _contextProvider.GetContext().PlayerInputModel;
     }
 
     private void Update()
     {
         if (entered)
         {
-            foreach (var entity in _playerInputFilter)
-            {
-                ref var playerInputComponent = ref _playerInputPool.Get(entity);
-                if (playerInputComponent.PressedX && !correct)
-                    codePanel.SetActive(true);
-            }
+            if (_inputModel.PressedX.Value && !correct)
+                codePanel.SetActive(true);
         }
 
         if (correct & close) 

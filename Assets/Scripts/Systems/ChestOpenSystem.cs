@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using CubeECS;
+using CubeMVC;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
@@ -95,4 +97,8 @@ namespace CubeECS
             }
         }
     }
+}
+
+namespace CubeMVC
+{
 }

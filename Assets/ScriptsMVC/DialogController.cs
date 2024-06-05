@@ -13,8 +13,10 @@ namespace CubeMVC
         private ContextProvider _contextProvider;
 
         private bool _isProcessing;
+        private bool _isEndDialog;
         private bool _continueDialog;
         private Text _dialogText;
+        private string _text;
 
         private DialogModel _dialogModel;
         private PlayerInputModel _inputModel;
@@ -30,16 +32,19 @@ namespace CubeMVC
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0) && !_continueDialog)
+            if (Input.GetMouseButtonDown(0) && _isEndDialog)
             {
                 _continueDialog = true;
+                _isEndDialog = false;
             }
         }
 
-        public void StartDialog()
+        public void StartDialog(string text)
         {
             if (_isProcessing)
                 return;
+
+            _text = text;
 
             StartCoroutine(StartCoroutine());
         }
@@ -54,11 +59,13 @@ namespace CubeMVC
             _dialogPanel.SetActive(true);
             _dialogText.text = string.Empty;
 
-            foreach (char c in _dialogModel.InputText)
+            foreach (var c in _text)
             {
                 _dialogText.text += c;
                 yield return new WaitForSeconds(_dialogModel.TextSpeed);
             }
+
+            _isEndDialog = true;
 
             yield return new WaitUntil(() => _continueDialog);
 

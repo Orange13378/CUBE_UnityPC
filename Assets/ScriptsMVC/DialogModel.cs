@@ -2,8 +2,7 @@ namespace CubeMVC
 {
     public class DialogModel
     {
-        public string InputText;
-        public delegate void OnDialogStarted();
+        public delegate void OnDialogStarted(string text);
         public OnDialogStarted OnDialogStart;
         public float TextSpeed;
 

@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
-using CubeECS;
-using Leopotam.EcsLite;
+using CubeMVC;
 
 public class MoveBlocks : MonoBehaviour
 {
-    [SerializeField] Vector3 nextPos = new Vector3();
+    [SerializeField] Vector3 nextPos = new ();
 
     private bool moved, pressedE, entered, once;
     Vector3 startPos;
@@ -18,9 +17,9 @@ public class MoveBlocks : MonoBehaviour
     private SpriteRenderer _underPlite2SpriteRenderer;
     private EdgeCollider2D _edgeCollider;
 
-    private EcsWorld _world;
-    private EcsFilter _playerInputFilter;
-    private EcsPool<PlayerInputComponent> _playerInputPool;
+    [SerializeField]
+    private ContextProvider _contextProvider;
+    private PlayerInputModel _inputModel;
 
     public static bool sprite;
     
@@ -36,19 +35,13 @@ public class MoveBlocks : MonoBehaviour
         _underPlite2SpriteRenderer = underPlite2.GetComponent<SpriteRenderer>();
         _edgeCollider = gameObject.GetComponent<EdgeCollider2D>();
 
-        _world = EcsWorldManager.GetEcsWorld();
-        _playerInputFilter = _world.Filter<PlayerInputComponent>().End();
-        _playerInputPool = _world.GetPool<PlayerInputComponent>();
+        _inputModel = _contextProvider.GetContext().PlayerInputModel;
     }
 
     private void Update()
     {
-        foreach (var entity in _playerInputFilter)
-        {
-            ref var playerInputComponent = ref _playerInputPool.Get(entity);
-            if (!playerInputComponent.PressedX)
-                return;
-        }
+        if (!_inputModel.PressedX.Value)
+            return;
 
         if (entered && once)
         {

@@ -1,14 +1,13 @@
 using Cinemachine;
 using UnityEngine;
 
-public struct CubeComponent
+namespace CubeECS
 {
-    public GameObject Player;
-    public string DialogText;
+    public struct CubeComponent
+    {
+        public GameObject Player;
 
-    public delegate void OnInteracted();
-    public OnInteracted OnInteractedCallback;
-
-    public CinemachineVirtualCamera VirtualCamera;
-    public CinemachineBasicMultiChannelPerlin VirtualCameraChannel;
+        public CinemachineVirtualCamera VirtualCamera;
+        public CinemachineBasicMultiChannelPerlin VirtualCameraChannel;
+    }
 }

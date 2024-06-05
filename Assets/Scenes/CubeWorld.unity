@@ -2207,6 +2207,7 @@ MonoBehaviour:
   door: {fileID: 461565426}
   codePanel: {fileID: 1047117398}
   panel: {fileID: 126573175}
+  _contextProvider: {fileID: 348089123}
 --- !u!61 &138343864
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3862,6 +3863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5410b2b3a09afea4ca76a964dbfeae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _contextProvider: {fileID: 348089123}
   pressedID: 
   pressedElectroID: 
   buttonSound: {fileID: 8300000, guid: fadf3dea201aa8a47925c8aafbfa471b, type: 3}
@@ -5031,6 +5033,65 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6635132727457301989, guid: 037c0947af0b24a4999b5525363835c1, type: 3}
   m_PrefabInstance: {fileID: 2089450046}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &341693862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 341693863}
+  - component: {fileID: 341693864}
+  - component: {fileID: 341693865}
+  m_Layer: 0
+  m_Name: ChestController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &341693863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341693862}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 760177923}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &341693864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341693862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33e54a5483a78b44abe69ace6ce32cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _contextProvider: {fileID: 348089123}
+--- !u!114 &341693865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341693862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce2ab670e63d0542a42f95ce58e398b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _contextProvider: {fileID: 348089123}
 --- !u!1 &343201631
 GameObject:
   m_ObjectHideFlags: 0
@@ -5179,12 +5240,19 @@ MonoBehaviour:
   - {fileID: 973982861}
   - {fileID: 1285273905}
   _pedestalsUI:
-  - {fileID: 1377887617}
-  - {fileID: 762526632}
-  - {fileID: 813208848}
-  - {fileID: 889609328}
-  - {fileID: 973982861}
-  - {fileID: 1285273905}
+  - {fileID: 1528479897}
+  - {fileID: 194221446}
+  - {fileID: 1437294288}
+  - {fileID: 137279776}
+  - {fileID: 1104995931}
+  - {fileID: 537762891}
+  _chests:
+  - {fileID: 2038834550}
+  - {fileID: 1034628391}
+  - {fileID: 891092760}
+  - {fileID: 252076959}
+  - {fileID: 1717356652}
+  - {fileID: 0}
   _pedestalItems:
   - {fileID: 11400000, guid: 15394f5a844afaf4da923cf3d4082ce6, type: 2}
   - {fileID: 11400000, guid: c1bfa9002d03e204abc071ce64dfcb53, type: 2}
@@ -5192,6 +5260,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f0fc78e388231ad448ae4d76d0082564, type: 2}
   - {fileID: 11400000, guid: 763e1aa404e28b0499a6dc9976a9e211, type: 2}
   - {fileID: 11400000, guid: 8310390fbfa073449a327bdb03010d58, type: 2}
+  _virtualCamera: {fileID: 1674600692}
+  WhiteScreenImage: {fileID: 2135982525}
+  BlackScreenImage: {fileID: 1491544857}
 --- !u!1 &351226622
 GameObject:
   m_ObjectHideFlags: 0
@@ -10977,7 +11048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229a66c6d41c2614585527b224929ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diaolog: {fileID: 710054651}
+  _contextProvider: {fileID: 348089123}
 --- !u!4 &710054656
 Transform:
   m_ObjectHideFlags: 0
@@ -11949,6 +12020,7 @@ Transform:
   - {fileID: 834674632}
   - {fileID: 2034473490}
   - {fileID: 348089121}
+  - {fileID: 341693863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &762526632
@@ -62751,6 +62823,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 5
+--- !u!114 &978467742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978467730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a826c12867ac984e8d969ee7a144d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _contextProvider: {fileID: 348089123}
 --- !u!1001 &981285222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64973,6 +65058,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7541128607178373764, guid: b735448500613f84eb0d75c35955cc28, type: 3}
       insertIndex: -1
       addedObject: {fileID: 978467738}
+    - targetCorrespondingSourceObject: {fileID: 7541128607178373764, guid: b735448500613f84eb0d75c35955cc28, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 978467742}
     - targetCorrespondingSourceObject: {fileID: 411437229184624344, guid: b735448500613f84eb0d75c35955cc28, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1094144095}
@@ -108245,6 +108333,10 @@ PrefabInstance:
       propertyPath: stone
       value: 
       objectReference: {fileID: 11400000, guid: 718fc376479cdca46808f44e87318cd9, type: 2}
+    - target: {fileID: 1749492668496753606, guid: f3d4e66ea8f594642abb56d815a2fbf1, type: 3}
+      propertyPath: _contextProvider
+      value: 
+      objectReference: {fileID: 348089123}
     - target: {fileID: 1749492668496753607, guid: f3d4e66ea8f594642abb56d815a2fbf1, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -108912,6 +109004,10 @@ PrefabInstance:
       propertyPath: sprite_goPlite
       value: 
       objectReference: {fileID: 8822695631290108128, guid: 87299bb0de03d614da22f50286b976c2, type: 3}
+    - target: {fileID: 7278647204962558693, guid: 90df358ef7639334eab5db25f52ecda5, type: 3}
+      propertyPath: _contextProvider
+      value: 
+      objectReference: {fileID: 348089123}
     - target: {fileID: 7278647204962558693, guid: 90df358ef7639334eab5db25f52ecda5, type: 3}
       propertyPath: sprite_backPlite
       value: 

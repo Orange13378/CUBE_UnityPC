@@ -1,4 +1,6 @@
+using Cinemachine;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CubeMVC
 {
@@ -13,17 +15,15 @@ namespace CubeMVC
         [SerializeField]
         private AudioClip[] _footSteps;
         [SerializeField]
-        private GameObject _player;
+        private GameObject _player, _pedestalGO, _pedestalCubeGO;
         [SerializeField]
-        private GameObject _pedestalGO;
-        [SerializeField]
-        private GameObject _pedestalCubeGO;
-        [SerializeField]
-        private GameObject[] _worlds;
-        [SerializeField]
-        private GameObject[] _pedestalsUI;
+        private GameObject[] _worlds, _pedestalsUI, _chests;
         [SerializeField]
         private PedestalItem[] _pedestalItems;
+        [SerializeField]
+        private CinemachineVirtualCamera _virtualCamera;
+        [SerializeField]
+        private Image WhiteScreenImage, BlackScreenImage;
 
         public Context GetContext()
         {
@@ -32,12 +32,20 @@ namespace CubeMVC
 
             _context = new();
             _context.ContextOwnerGO = gameObject;
-            _context.Player = _player;
             _context.PlayerView = _playerView;
+            _context.PlayerInputModel = new(); 
             _context.CameraView = _cameraView;
-            _context.PlayerInputModel = new();
             _context.InventoryModel = new();
             _context.DialogModel = new(0.02f);
+
+            _context.ChestModel = new();
+            _context.ChestModel.Chests = _chests;
+            _context.ChestModel.Chests = _chests;
+
+            _context.CubeModel = new(_player, _virtualCamera, 
+                _virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>());
+
+            _context.ImageModel = new ImageModel(WhiteScreenImage, BlackScreenImage);
 
             _context.PedestalModel = new();
             _context.PedestalModel.PedestalGO = _pedestalGO;
@@ -47,6 +55,8 @@ namespace CubeMVC
             _context.PedestalModel.PedestalItems = _pedestalItems;
 
             _context.FootstepsModel = new(_footSteps);
+
+            _context.PlayerAnimationModel = new(_player.GetComponentInChildren<Animator>());
 
             return _context;
         }

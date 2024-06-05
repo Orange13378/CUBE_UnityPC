@@ -1,5 +1,4 @@
-using CubeECS;
-using Leopotam.EcsLite;
+using CubeMVC;
 using UnityEngine;
 
 public class PrintText : MonoBehaviour
@@ -7,14 +6,13 @@ public class PrintText : MonoBehaviour
     [SerializeField] 
     [TextArea] string text = null;
 
-    private EcsFilter _dialogFilter;
-    private EcsPool<DialogComponent> _dialogPool;
+    private ContextProvider _contextProvider;
+    private DialogModel _dialogModel;
 
     private void Start()
     {
-        var ecsWorld = EcsWorldManager.GetEcsWorld();
-        _dialogFilter = ecsWorld.Filter<DialogComponent>().End();
-        _dialogPool = ecsWorld.GetPool<DialogComponent>();
+        _contextProvider = FindObjectOfType<ContextProvider>();
+        _dialogModel = _contextProvider.GetContext().DialogModel;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -22,12 +20,7 @@ public class PrintText : MonoBehaviour
         if (!other.CompareTag("Player")) 
             return;
 
-        foreach (var entity in _dialogFilter)
-        {
-            ref var dialogComponent = ref _dialogPool.Get(entity);
-            dialogComponent.DialogItem.InputText = text;
-            dialogComponent.DialogSystem.StartDialog();
-        }
+        _dialogModel.OnDialogStart(text);
 
         gameObject.SetActive(false);
     }

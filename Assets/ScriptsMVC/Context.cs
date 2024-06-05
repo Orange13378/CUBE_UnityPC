@@ -12,7 +12,9 @@ namespace CubeMVC
         public InventoryModel InventoryModel { get; set; }
         public PedestalModel PedestalModel { get; set; }
         public DialogModel DialogModel { get; set; }
-
-        public GameObject Player;
+        public ChestModel ChestModel { get; set; }
+        public CubeModel CubeModel { get; set; }
+        public ImageModel ImageModel { get; set; }
+        public PlayerAnimationModel PlayerAnimationModel { get; set; }
     }
 }

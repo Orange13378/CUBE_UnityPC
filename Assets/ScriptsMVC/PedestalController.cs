@@ -26,13 +26,12 @@ namespace MVC
 
             if (_pedestalModel.CurrentUI == PedestalWorld.White)
             {
-                _dialogModel.InputText = "Странный куб";
-                _dialogModel.OnDialogStart.Invoke();
+                _dialogModel.OnDialogStart.Invoke("Странный куб");
             }
 
             _pedestalModel.PedestalsUI[(int)_pedestalModel.CurrentUI].SetActive(true);
 
-            // Disable Player
+            _playerInputModel.IsPlayerActive.Value = false;
         }
     }
 }

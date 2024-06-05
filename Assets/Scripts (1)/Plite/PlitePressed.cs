@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class PlitePressed : MonoBehaviour {
-
-	public PliteID plite;
+public class PlitePressed : MonoBehaviour 
+{
+    [SerializeField]
+	private PliteID plite;
 
     [System.NonSerialized] public bool electro_pressed = true;
+
+    private SpriteRenderer _spriteRenderer;
 
     public enum States
     {
@@ -13,10 +16,11 @@ public class PlitePressed : MonoBehaviour {
         State2 = 2
     }
 
-    States st;
+    private States st;
     private void Start()
     {
         st = States.State1;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -35,19 +39,19 @@ public class PlitePressed : MonoBehaviour {
 
                 if (st == States.State0)
                 {
-                    gameObject.GetComponent<SpriteRenderer>().sprite = plite.icon;
+                    _spriteRenderer.sprite = plite.icon;
                     PliteScripts.instance.OutCode(plite);
                 }
                 else if (st == States.State1)
                 {
-                    gameObject.GetComponent<SpriteRenderer>().sprite = plite.newIcon;
+                    _spriteRenderer.sprite = plite.newIcon;
                     PliteScripts.instance.GetCode(plite);
                 }
             }
 
-            else if (ElectroMech.electro == true)
+            else if (ElectroMech.electro)
             {
-                if (electro_pressed == true)
+                if (electro_pressed)
                 {
                     st = States.State2;
                     electro_pressed = false;
@@ -55,18 +59,18 @@ public class PlitePressed : MonoBehaviour {
                 
                 if (st == States.State0)
                 {
-                    gameObject.GetComponent<SpriteRenderer>().sprite = plite.icon;
+                    _spriteRenderer.sprite = plite.icon;
                     PliteScripts.instance.OutCode(plite);
                     PliteScripts.instance.OutCodeElectro(plite);
                 }
                 else if (st == States.State1)
                 {
-                    gameObject.GetComponent<SpriteRenderer>().sprite = plite.newIcon;
+                    _spriteRenderer.sprite = plite.newIcon;
                     PliteScripts.instance.GetCode(plite);
                 }
                 else if (st == States.State2)
                 {
-                    gameObject.GetComponent<SpriteRenderer>().sprite = plite.electroIcon;
+                    _spriteRenderer.sprite = plite.electroIcon;
                     PliteScripts.instance.GetCodeElectro(plite);
                     PliteScripts.instance.OutCode(plite);
                 }
