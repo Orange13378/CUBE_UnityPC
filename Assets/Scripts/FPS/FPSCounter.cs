@@ -9,6 +9,12 @@ namespace CubeECS
         private float _updateInterval;
         private float _fps;
 
+        private void Start()
+        {
+            Application.targetFrameRate = 300;
+            QualitySettings.vSyncCount = 0;
+        }
+
         private void Update()
         {
             _frameCount++;

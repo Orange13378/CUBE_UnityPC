@@ -2473,13 +2473,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 156767079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26c605fd1064bd14ca9ffcd108de24a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 45796af27d169f14a8f6c374105c88f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frameCount: 0
-  _elapsedTime: 0
-  _updateInterval: 0
-  _fps: 0
 --- !u!114 &156767082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2489,13 +2485,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 156767079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f1748b1cb65a5a4298ca810db6d0b31, type: 3}
+  m_Script: {fileID: 11500000, guid: cad5c060f83c95b4ea9313ff4b75c5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fpsCounter: {fileID: 156767081}
-  _totalFPS: 0
-  _samplesCount: 0
-  _currentFPS: 0
+  _averageFPSCalculator: {fileID: 156767083}
+  _fpsDisplayText: {fileID: 1314068711}
 --- !u!114 &156767083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2505,11 +2499,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 156767079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb13143d5244d504c983fb526150b5ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ea282c3194621c4cb20b298ab587acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _averageFPSCalculator: {fileID: 156767082}
-  _fpsDisplayText: {fileID: 1314068711}
+  _fpsCounter: {fileID: 156767081}
 --- !u!4 &157493791 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 684172157996212386, guid: 0052d0fd607d2df43ba16c9a8d99e414, type: 3}
@@ -74736,8 +74729,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -921, y: 441.24}
-  m_SizeDelta: {x: 317, y: 77.9679}
+  m_AnchoredPosition: {x: 952.3447, y: -417.9751}
+  m_SizeDelta: {x: 264.3108, y: 116.0177}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1317165669 stripped
 GameObject:
