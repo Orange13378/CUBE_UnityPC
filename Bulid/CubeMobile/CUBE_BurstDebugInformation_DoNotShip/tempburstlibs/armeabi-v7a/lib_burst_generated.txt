@@ -12,7 +12,6 @@ Library: C:\GitHubProjects\CUBE_Unity_PC\Temp\BurstOutput\tempburstlibs\armeabi-
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=Unity.MemoryProfiler;
 --assembly-defines=Unity.2D.IK.Runtime;
---assembly-defines=Leopotam.EcsLite;
 --assembly-defines=Unity.AI.Navigation;
 --assembly-defines=Unity.Burst;
 --assembly-defines=UniTask.TextMeshPro;
@@ -22,14 +21,13 @@ Library: C:\GitHubProjects\CUBE_Unity_PC\Temp\BurstOutput\tempburstlibs\armeabi-
 --assembly-defines=UniTask.Linq;
 --assembly-defines=Unity.InternalAPIEngineBridge.001;
 --assembly-defines=Unity.2D.Common.Runtime;
+--assembly-defines=UniRx;
 --assembly-defines=Unity.Timeline;
---assembly-defines=Leopotam.EcsLite.Di;
 --assembly-defines=Unity.Collections;
 --assembly-defines=Unity.2D.SpriteShape.Runtime;
 --assembly-defines=Unity.2D.PixelPerfect;
 --assembly-defines=Unity.Mathematics;
 --assembly-defines=Unity.TextMeshPro;
---assembly-defines=Leopotam.EcsLite.ExtendedSystems;
 --assembly-defines=UniTask;
 --assembly-defines=Cinemachine;
 --assembly-defines=Unity.Collections.LowLevel.ILSupport;
