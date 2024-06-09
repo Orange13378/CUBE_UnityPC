@@ -51,7 +51,7 @@ namespace CubeECS
                     {
                         ref var dialogComponent = ref _dialogPool.Value.Get(dialogEntity);
                         dialogComponent.InputText = "Странный куб";
-                        dialogComponent.DialogSystem.StartDialog();
+                        dialogComponent.DialogBehavior.StartDialog();
                     }
 
                     return;

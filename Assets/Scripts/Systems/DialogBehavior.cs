@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace CubeECS
 {
-    public class DialogSystem : MonoBehaviour
+    public class DialogBehavior : MonoBehaviour
     {
         [SerializeField]
         private GameObject _dialogPanel;
@@ -51,7 +51,7 @@ namespace CubeECS
             StartCoroutine(StartCoroutine());
         }
 
-        public IEnumerator StartCoroutine()
+        public new IEnumerator StartCoroutine()
         {
             var disablePlayer = _world.NewEntity();
             _disablePlayerPool.Add(disablePlayer).Deactivate = true;

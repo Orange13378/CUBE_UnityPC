@@ -26,7 +26,7 @@ public class PrintText : MonoBehaviour
         {
             ref var dialogComponent = ref _dialogPool.Get(entity);
             dialogComponent.InputText = text;
-            dialogComponent.DialogSystem.StartDialog();
+            dialogComponent.DialogBehavior.StartDialog();
         }
 
         gameObject.SetActive(false);

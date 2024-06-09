@@ -65,7 +65,7 @@ public class PliteScripts : MonoBehaviour
                 {
                     ref var dialogComponent = ref _dialogPool.Get(entity);
                     dialogComponent.InputText = "Кажется что-то приближается";
-                    dialogComponent.DialogSystem.StartDialog();
+                    dialogComponent.DialogBehavior.StartDialog();
                 }
 
                 correctCode = true;
@@ -92,7 +92,7 @@ public class PliteScripts : MonoBehaviour
                 {
                     ref var dialogComponent = ref _dialogPool.Get(entity);
                     dialogComponent.InputText = "Что это?";
-                    dialogComponent.DialogSystem.StartDialog();
+                    dialogComponent.DialogBehavior.StartDialog();
                 }
 
                 correctCode1 = true;
@@ -127,7 +127,7 @@ public class PliteScripts : MonoBehaviour
                 {
                     ref var dialogComponent = ref _dialogPool.Get(entity);
                     dialogComponent.InputText = "Кажется я что-то слышу";
-                    dialogComponent.DialogSystem.StartDialog();
+                    dialogComponent.DialogBehavior.StartDialog();
                 }
 
                 correctCode = true;
@@ -154,7 +154,7 @@ public class PliteScripts : MonoBehaviour
                 {
                     ref var dialogComponent = ref _dialogPool.Get(entity);
                     dialogComponent.InputText = "Что это?";
-                    dialogComponent.DialogSystem.StartDialog();
+                    dialogComponent.DialogBehavior.StartDialog();
                 }
 
                 correctCode1 = true;
@@ -187,7 +187,7 @@ public class PliteScripts : MonoBehaviour
                 {
                     ref var dialogComponent = ref _dialogPool.Get(entity);
                     dialogComponent.InputText = "Что-то движется сюда";
-                    dialogComponent.DialogSystem.StartDialog();
+                    dialogComponent.DialogBehavior.StartDialog();
                 }
 
                 nextStage2 = false;
@@ -218,7 +218,7 @@ public class PliteScripts : MonoBehaviour
                 {
                     ref var dialogComponent = ref _dialogPool.Get(entity);
                     dialogComponent.InputText = "Что-то движется сюда";
-                    dialogComponent.DialogSystem.StartDialog();
+                    dialogComponent.DialogBehavior.StartDialog();
                 }
                 nextStage2 = false;
                 //pliteID.OnEnable();

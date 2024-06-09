@@ -38,7 +38,7 @@ public class ItemPickup : MonoBehaviour {
                 ref var dialogComponent = ref _dialogPool.Get(entity);
                 dialogComponent.InputText = "Похоже на лампочку " +
                                                        "<Открылась возможность использовать предмет в отдельном меню>";
-                dialogComponent.DialogSystem.StartDialog();
+                dialogComponent.DialogBehavior.StartDialog();
             }
 
 			objectUI.SetActive(true);
@@ -54,7 +54,7 @@ public class ItemPickup : MonoBehaviour {
                 ref var dialogComponent = ref _dialogPool.Get(entity);
                 dialogComponent.InputText = "Похоже на термометр " +
                                                        "<Открылась возможность использовать термометр>";
-                dialogComponent.DialogSystem.StartDialog();
+                dialogComponent.DialogBehavior.StartDialog();
             }
 
 			objectUI.SetActive(true);
@@ -70,7 +70,7 @@ public class ItemPickup : MonoBehaviour {
                 ref var dialogComponent = ref _dialogPool.Get(entity);
                 dialogComponent.InputText = "Это магнит " +
                                                        "<Открылась возможность использовать магнит>";
-                dialogComponent.DialogSystem.StartDialog();
+                dialogComponent.DialogBehavior.StartDialog();
             }
 
             objectUI.SetActive(true);
@@ -86,7 +86,7 @@ public class ItemPickup : MonoBehaviour {
                 ref var dialogComponent = ref _dialogPool.Get(entity);
                 dialogComponent.InputText = "Странные часы " +
                                                        "<Открылась возможность использовать часы>";
-                dialogComponent.DialogSystem.StartDialog();
+                dialogComponent.DialogBehavior.StartDialog();
             }
 
             objectUI.SetActive(true);

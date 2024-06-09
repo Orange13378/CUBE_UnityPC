@@ -29,7 +29,7 @@ namespace CubeECS
         [SerializeField] private GameObject[] worlds;
         [SerializeField] private PedestalItem[] pedestals;
         [SerializeField] private GameObject[] pedestalsUI;
-        [SerializeField] private DialogSystem dialogSystem;
+        [SerializeField] private DialogBehavior _dialogBehavior;
 
         private void Awake()
         {
@@ -54,7 +54,7 @@ namespace CubeECS
             gameData.Worlds = worlds;
             gameData.Pedestals = pedestals;
             gameData.PedestalsUI = pedestalsUI;
-            gameData.DialogSystem = dialogSystem;
+            gameData.DialogBehavior = _dialogBehavior;
 
             initSystems = new EcsSystems(_world, gameData)
                     .Add(new PlayerInitSystem())

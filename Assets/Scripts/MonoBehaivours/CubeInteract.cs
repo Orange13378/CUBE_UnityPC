@@ -160,7 +160,7 @@ namespace CubeECS
             {
                 ref var dialogComponent = ref _dialogPool.Get(entity);
                 dialogComponent.InputText = cubeItem.DialogText;
-                dialogComponent.DialogSystem.StartDialog();
+                dialogComponent.DialogBehavior.StartDialog();
             }
         }
     }

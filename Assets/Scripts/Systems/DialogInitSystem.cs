@@ -18,7 +18,7 @@ namespace CubeECS
             foreach (var entity in _filters.Value)
             {
                 ref var dialogComponent = ref _dialogPool.Value.Get(entity);
-                dialogComponent.DialogSystem = _gameData.Value.DialogSystem;
+                dialogComponent.DialogBehavior = _gameData.Value.DialogBehavior;
                 dialogComponent.TextSpeed = 0.02f;
             }
         }

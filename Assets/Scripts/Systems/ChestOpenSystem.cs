@@ -74,7 +74,7 @@ namespace CubeECS
                 {
                     ref var dialogComponent = ref _dialogPool.Value.Get(entity);
                     dialogComponent.InputText = chest.Success;
-                    dialogComponent.DialogSystem.StartDialog();
+                    dialogComponent.DialogBehavior.StartDialog();
                 }
 
                 _chestComponent.CurrentOpenedItem.SetActive(true);
@@ -85,7 +85,7 @@ namespace CubeECS
                 {
                     ref var dialogComponent = ref _dialogPool.Value.Get(entity);
                     dialogComponent.InputText = chest.Bad;
-                    dialogComponent.DialogSystem.StartDialog();
+                    dialogComponent.DialogBehavior.StartDialog();
                 }
             }
         }

@@ -33,7 +33,7 @@ public class StoneScript : MonoBehaviour
         {
             ref var dialogComponent = ref _dialogPool.Get(entity);
             dialogComponent.InputText = stoneID.text;
-            dialogComponent.DialogSystem.StartDialog();
+            dialogComponent.DialogBehavior.StartDialog();
         }
     }
 
@@ -43,7 +43,7 @@ public class StoneScript : MonoBehaviour
         {
             ref var dialogComponent = ref _dialogPool.Get(entity);
             dialogComponent.InputText = stoneID.electroText;
-            dialogComponent.DialogSystem.StartDialog();
+            dialogComponent.DialogBehavior.StartDialog();
         }
     }
 }

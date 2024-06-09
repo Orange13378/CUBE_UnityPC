@@ -43,7 +43,7 @@ public class InventorySlot : MonoBehaviour {
             {
                 ref var dialogComponent = ref _dialogPool.Get(entity);
                 dialogComponent.InputText = _item.text;
-                dialogComponent.DialogSystem.StartDialog();
+                dialogComponent.DialogBehavior.StartDialog();
             }
         }
 	}

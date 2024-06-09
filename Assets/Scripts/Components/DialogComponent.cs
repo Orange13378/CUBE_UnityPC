@@ -3,7 +3,7 @@ namespace CubeECS
     public struct DialogComponent
     {
         public string InputText;
-        public DialogSystem DialogSystem;
+        public DialogBehavior DialogBehavior;
         public float TextSpeed;
     }
 }
