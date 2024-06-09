@@ -51,7 +51,7 @@ namespace CubeECS
             StartCoroutine(StartCoroutine());
         }
 
-        public new IEnumerator StartCoroutine()
+        public IEnumerator StartCoroutine()
         {
             var disablePlayer = _world.NewEntity();
             _disablePlayerPool.Add(disablePlayer).Deactivate = true;

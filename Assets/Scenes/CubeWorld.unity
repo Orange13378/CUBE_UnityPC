@@ -104898,7 +104898,7 @@ MonoBehaviour:
   - {fileID: 137279776}
   - {fileID: 1104995931}
   - {fileID: 537762891}
-  _dialogBehavior: {fileID: 0}
+  _dialogBehavior: {fileID: 710054657}
 --- !u!4 &2034473490
 Transform:
   m_ObjectHideFlags: 0
