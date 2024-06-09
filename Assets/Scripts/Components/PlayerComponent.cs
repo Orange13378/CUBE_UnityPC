@@ -6,7 +6,6 @@ namespace CubeECS
     {
         public Transform PlayerTransform;
         public Rigidbody2D PlayerRB;
-        public BoxCollider2D PlayerCollider;
         public AudioSource PlayerAudioSource;
         public Animator PlayerAnimator;
         public float PlayerSpeed;

@@ -10,7 +10,6 @@ namespace CubeECS
         private GameObject panelDrop;
 
         private InventoryComponent _inventory;
-        private InventorySlot[] _slots;
         private Text _itemPickedText;
 
         private void Start()
@@ -18,7 +17,6 @@ namespace CubeECS
             var ecsWorld = EcsWorldManager.GetEcsWorld();
             var filter = ecsWorld.Filter<InventoryComponent>().End();
             var inventoryPool = ecsWorld.GetPool<InventoryComponent>();
-            _slots = GetComponentsInChildren<InventorySlot>();
             _itemPickedText = panelDrop.GetComponentInChildren<Text>();
 
             foreach (var entity in filter)

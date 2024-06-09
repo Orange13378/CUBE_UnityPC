@@ -20,7 +20,6 @@ namespace CubeECS
             {
                 ref var cubeCmp = ref _cubePool.Value.Get(entity);
                 cubeCmp.Player = _gameData.Value.Player;
-                cubeCmp.VirtualCamera = _gameData.Value.VirtualCamera;
                 cubeCmp.VirtualCameraChannel = _gameData.Value.VirtualCamera
                     .GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             }

@@ -7,7 +7,7 @@ namespace CubeECS
     public class ChestInteract : MonoBehaviour
     {
         [SerializeField] public ChestItem chestItem;
-        [SerializeField] public GameObject openedItem;
+        [SerializeField] private GameObject openedItem;
 
         private EcsFilter _playerInputFilter;
         private EcsFilter _chestFilter;

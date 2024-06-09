@@ -1,29 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
-using Leopotam.EcsLite;
 using UnityEngine;
 using UnityEngine.UI;
-using CubeECS;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : MonoBehaviour
+{
 
-	#region Singleton
+    #region Singleton
 
-	public static Inventory instance;
+    public static Inventory instance;
 
-	void Awake ()
-	{
-		instance = this;
-	}
+    void Awake()
+    {
+        instance = this;
+    }
 
-	#endregion
+    #endregion
 
-	public delegate void OnItemChanged();
-	public OnItemChanged onItemChangedCallback;
+    public delegate void OnItemChanged();
+    public OnItemChanged onItemChangedCallback;
 
-	public int space = 20;	// Amount of item spaces
+    public int space = 20;  // Amount of item spaces
 
-	// Our current list of items in the inventory
+    // Our current list of items in the inventory
     [SerializeField] Sprite sprite_chest, sprite_chest2, sprite_chest3, sprite_chest4, sprite_chest5, sprite_chest6;
 
     [SerializeField] private GameObject chest, chest2, chest3, chest4, chest5, chest6, panelDrop, magnit, stoneBlue, stoneOrange, termo, time, objectUI;
@@ -35,32 +34,27 @@ public class Inventory : MonoBehaviour {
 
 
     // Add a new item if enough room
-    public void Add (Item item)
-	{
-		if (item.showInInventory) {
-			if (items.Count >= space) {
-				Debug.Log ("Not enough room.");
-				return;
-			}
+    public void Add(Item item)
+    {
 
-			items.Add(item);
+        items.Add(item);
 
-            onItemChangedCallback?.Invoke();
+        onItemChangedCallback?.Invoke();
 
-            StartCoroutine(ItemPickedUp());
-		}
+        StartCoroutine(ItemPickedUp());
+
     }
 
     public void ReloadUI()
     {
-		if (onItemChangedCallback != null) onItemChangedCallback.Invoke();
+        if (onItemChangedCallback != null) onItemChangedCallback.Invoke();
     }
 
     IEnumerator ItemPickedUp()
     {
         panelDrop.SetActive(true);
-        if (items.Count >= 1) 
-            itemPicked.text =  $"Предмет <color=purple>{items[^1].name}</color> был подобран";
+        if (items.Count >= 1)
+            itemPicked.text = $"Предмет <color=purple>{items[^1].name}</color> был подобран";
         yield return new WaitForSeconds(2.5f);
         panelDrop.SetActive(false);
     }
@@ -73,7 +67,7 @@ public class Inventory : MonoBehaviour {
             {
                 if (!used_chest)
                 {
-                    if(items.Exists(x => x.id == 4))
+                    if (items.Exists(x => x.id == 4))
                     {
                         used_chest = true;
                         chest.GetComponent<SpriteRenderer>().sprite = sprite_chest;
@@ -89,14 +83,14 @@ public class Inventory : MonoBehaviour {
                     else
                     {
                         Debug.Log("Что бы открыть сундук нужен белый ключ");
-                        
+
                         return;
                     }
                 }
 
                 if (!used_chest3)
                 {
-                    if(items.Exists(x => x.id == 6))
+                    if (items.Exists(x => x.id == 6))
                     {
                         used_chest3 = true;
                         chest3.GetComponent<SpriteRenderer>().sprite = sprite_chest3;
@@ -117,7 +111,7 @@ public class Inventory : MonoBehaviour {
 
                 if (!used_chest2)
                 {
-                    if(items.Exists(x => x.id == 5))
+                    if (items.Exists(x => x.id == 5))
                     {
                         used_chest2 = true;
                         chest2.GetComponent<SpriteRenderer>().sprite = sprite_chest2;
@@ -139,7 +133,7 @@ public class Inventory : MonoBehaviour {
 
                 if (!used_chest4)
                 {
-                    if(items.Exists(x => x.id == 7))
+                    if (items.Exists(x => x.id == 7))
                     {
                         used_chest4 = true;
                         chest4.GetComponent<SpriteRenderer>().sprite = sprite_chest4;
@@ -162,7 +156,7 @@ public class Inventory : MonoBehaviour {
                 if (!used_chest5)
                 {
 
-                    if(items.Exists(x => x.id == 8))
+                    if (items.Exists(x => x.id == 8))
                     {
                         used_chest5 = true;
                         chest5.GetComponent<SpriteRenderer>().sprite = sprite_chest5;
@@ -180,11 +174,11 @@ public class Inventory : MonoBehaviour {
                         return;
                     }
                 }
-                
+
                 if (!used_chest6)
                 {
 
-                    if(items.Exists(x => x.id == 9))
+                    if (items.Exists(x => x.id == 9))
                     {
                         used_chest6 = true;
                         chest6.GetComponent<SpriteRenderer>().sprite = sprite_chest6;
@@ -192,7 +186,7 @@ public class Inventory : MonoBehaviour {
                         if (onItemChangedCallback != null)
                             onItemChangedCallback.Invoke();
 
-                        
+
                         //objectUI.SetActive(true);
                         return;
                     }

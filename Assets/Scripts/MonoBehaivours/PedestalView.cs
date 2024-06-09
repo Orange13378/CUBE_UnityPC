@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CubeECS
 {
-    public class PedestalMonoUI : MonoBehaviour
+    public class PedestalView : MonoBehaviour
     {
         private EcsWorld _ecsWorld;
         private EcsFilter _filter;

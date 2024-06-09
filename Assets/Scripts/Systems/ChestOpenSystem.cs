@@ -23,14 +23,9 @@ namespace CubeECS
         public void Init(IEcsSystems systems)
         {
             var chestEntity = _world.Value.NewEntity();
-            _chestPool.Value.Add(chestEntity);
-
-            foreach (var entity in _chestFilter.Value)
-            {
-                ref var chestComponent = ref _chestPool.Value.Get(entity);
-                chestComponent.Items = new List<ChestItem>();
-                _chestComponent = chestComponent;
-            }
+            ref var chestComponent = ref _chestPool.Value.Add(chestEntity);
+            chestComponent.Items = new List<ChestItem>();
+            _chestComponent = chestComponent;
 
             foreach (var entity in _inventoryFilter.Value)
             {

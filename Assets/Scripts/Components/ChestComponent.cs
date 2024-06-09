@@ -7,8 +7,5 @@ namespace CubeECS
     {
         public List<ChestItem> Items;
         public GameObject CurrentOpenedItem;
-
-        public delegate void OnItemInteracted();
-        public OnItemInteracted OnItemInteractedCallback;
     }
 }

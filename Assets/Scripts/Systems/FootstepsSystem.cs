@@ -17,43 +17,34 @@ namespace CubeECS
 
         public void Init(IEcsSystems systems)
         {
+            var gameData = systems.GetShared<GameData>();
+            var footstepsEntity = _world.Value.NewEntity();
+            ref var footstepsComponent = ref _footstepsPool.Value.Add(footstepsEntity);
+            footstepsComponent.FootSteps = gameData.FootStepsAudioClips;
+            footstepsComponent.Timer = 0.1f;
             foreach (var entity in _filters.Value)
             {
                 ref var playerComponent = ref _playerPool.Value.Get(entity);
-                _footstepsComponent.AudioSource = playerComponent.PlayerAudioSource;
+                footstepsComponent.AudioSource = playerComponent.PlayerAudioSource;
             }
-
-            var gameData = systems.GetShared<GameData>();
-            _footstepsComponent.FootSteps = gameData.FootStepsAudioClips;
-            _footstepsComponent.Timer = 0.1f;
-
-            var footstepsEntity = _world.Value.NewEntity();
-            _footstepsPool.Value.Add(footstepsEntity);
+            _footstepsComponent = footstepsComponent;
         }
-
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _filters.Value)
             {
                 ref var playerComponent = ref _playerPool.Value.Get(entity);
-
-                if (!playerComponent.IsPlayerActive)
-                    return;
-
+                if (!playerComponent.IsPlayerActive) return;
                 ref var playerInputComponent = ref _playerInputPool.Value.Get(entity);
-
-                if (playerInputComponent.MoveInput.x != 0 || playerInputComponent.MoveInput.y != 0)
+                if (playerInputComponent.MoveInput is { x: 0, y: 0 }) continue;
+                if (_footstepsComponent.Timer > 0)
                 {
-                    if (_footstepsComponent.Timer > 0)
-                    {
-                        _footstepsComponent.Timer -= Time.deltaTime;
-                    }
-
-                    if (_footstepsComponent.Timer <= 0)
-                    {
-                        _footstepsComponent.AudioSource.PlayOneShot(_footstepsComponent.FootSteps[Random.Range(0, _footstepsComponent.FootSteps.Length)]);
-                        _footstepsComponent.Timer = 0.42f;
-                    }
+                    _footstepsComponent.Timer -= Time.deltaTime;
+                }
+                if (_footstepsComponent.Timer <= 0)
+                {
+                    _footstepsComponent.AudioSource.PlayOneShot(_footstepsComponent.FootSteps[Random.Range(0, _footstepsComponent.FootSteps.Length)]);
+                    _footstepsComponent.Timer = 0.42f;
                 }
             }
         }

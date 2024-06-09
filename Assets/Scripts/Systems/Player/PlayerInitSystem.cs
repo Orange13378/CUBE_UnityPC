@@ -15,19 +15,18 @@ namespace CubeECS
         {
             var playerEntity = _world.Value.NewEntity();
 
-
             _playerPool.Value.Add(playerEntity);
             ref var playerComponent = ref _playerPool.Value.Get(playerEntity);
-            _playerInputPool.Value.Add(playerEntity);
 
             var playerGO = _gameData.Value.Player;
             playerComponent.IsPlayerActive = false;
             playerComponent.PlayerSpeed = _gameData.Value.Configuration.PlayerSpeed;
             playerComponent.PlayerTransform = playerGO.transform;
-            playerComponent.PlayerCollider = playerGO.GetComponent<BoxCollider2D>();
             playerComponent.PlayerRB = playerGO.GetComponent<Rigidbody2D>();
             playerComponent.PlayerAudioSource = playerGO.GetComponentInChildren<AudioSource>();
             playerComponent.PlayerAnimator = playerGO.GetComponentInChildren<Animator>();
+
+            _playerInputPool.Value.Add(playerEntity);
         }
     }
 }

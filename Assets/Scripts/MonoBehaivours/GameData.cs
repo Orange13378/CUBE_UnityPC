@@ -24,6 +24,6 @@ namespace CubeECS
         public GameObject[] Worlds;
         public GameObject[] PedestalsUI;
         public PedestalItem[] Pedestals;
-        public DialogSystem DialogSystem { get; set; }
+        public DialogSystem DialogSystem;
     }
 }
