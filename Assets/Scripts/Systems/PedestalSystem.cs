@@ -50,7 +50,7 @@ namespace CubeECS
                     foreach (var dialogEntity in _dialogFilter.Value)
                     {
                         ref var dialogComponent = ref _dialogPool.Value.Get(dialogEntity);
-                        dialogComponent.DialogItem.InputText = "Странный куб";
+                        dialogComponent.InputText = "Странный куб";
                         dialogComponent.DialogSystem.StartDialog();
                     }
 

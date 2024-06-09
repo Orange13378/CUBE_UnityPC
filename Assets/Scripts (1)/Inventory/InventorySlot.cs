@@ -42,7 +42,7 @@ public class InventorySlot : MonoBehaviour {
             foreach (var entity in _dialogFilter)
             {
                 ref var dialogComponent = ref _dialogPool.Get(entity);
-                dialogComponent.DialogItem.InputText = _item.text;
+                dialogComponent.InputText = _item.text;
                 dialogComponent.DialogSystem.StartDialog();
             }
         }

@@ -159,7 +159,7 @@ namespace CubeECS
             foreach (var entity in _dialogFilter)
             {
                 ref var dialogComponent = ref _dialogPool.Get(entity);
-                dialogComponent.DialogItem.InputText = cubeItem.DialogText;
+                dialogComponent.InputText = cubeItem.DialogText;
                 dialogComponent.DialogSystem.StartDialog();
             }
         }

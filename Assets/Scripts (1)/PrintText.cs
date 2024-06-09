@@ -25,7 +25,7 @@ public class PrintText : MonoBehaviour
         foreach (var entity in _dialogFilter)
         {
             ref var dialogComponent = ref _dialogPool.Get(entity);
-            dialogComponent.DialogItem.InputText = text;
+            dialogComponent.InputText = text;
             dialogComponent.DialogSystem.StartDialog();
         }
 

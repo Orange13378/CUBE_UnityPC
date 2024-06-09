@@ -64,7 +64,7 @@ public class PliteScripts : MonoBehaviour
                 foreach (var entity in _dialogFilter)
                 {
                     ref var dialogComponent = ref _dialogPool.Get(entity);
-                    dialogComponent.DialogItem.InputText = "Кажется что-то приближается";
+                    dialogComponent.InputText = "Кажется что-то приближается";
                     dialogComponent.DialogSystem.StartDialog();
                 }
 
@@ -91,7 +91,7 @@ public class PliteScripts : MonoBehaviour
                 foreach (var entity in _dialogFilter)
                 {
                     ref var dialogComponent = ref _dialogPool.Get(entity);
-                    dialogComponent.DialogItem.InputText = "Что это?";
+                    dialogComponent.InputText = "Что это?";
                     dialogComponent.DialogSystem.StartDialog();
                 }
 
@@ -126,7 +126,7 @@ public class PliteScripts : MonoBehaviour
                 foreach (var entity in _dialogFilter)
                 {
                     ref var dialogComponent = ref _dialogPool.Get(entity);
-                    dialogComponent.DialogItem.InputText = "Кажется я что-то слышу";
+                    dialogComponent.InputText = "Кажется я что-то слышу";
                     dialogComponent.DialogSystem.StartDialog();
                 }
 
@@ -153,7 +153,7 @@ public class PliteScripts : MonoBehaviour
                 foreach (var entity in _dialogFilter)
                 {
                     ref var dialogComponent = ref _dialogPool.Get(entity);
-                    dialogComponent.DialogItem.InputText = "Что это?";
+                    dialogComponent.InputText = "Что это?";
                     dialogComponent.DialogSystem.StartDialog();
                 }
 
@@ -186,7 +186,7 @@ public class PliteScripts : MonoBehaviour
                 foreach (var entity in _dialogFilter)
                 {
                     ref var dialogComponent = ref _dialogPool.Get(entity);
-                    dialogComponent.DialogItem.InputText = "Что-то движется сюда";
+                    dialogComponent.InputText = "Что-то движется сюда";
                     dialogComponent.DialogSystem.StartDialog();
                 }
 
@@ -217,7 +217,7 @@ public class PliteScripts : MonoBehaviour
                 foreach (var entity in _dialogFilter)
                 {
                     ref var dialogComponent = ref _dialogPool.Get(entity);
-                    dialogComponent.DialogItem.InputText = "Что-то движется сюда";
+                    dialogComponent.InputText = "Что-то движется сюда";
                     dialogComponent.DialogSystem.StartDialog();
                 }
                 nextStage2 = false;

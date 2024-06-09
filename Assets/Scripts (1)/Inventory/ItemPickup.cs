@@ -36,7 +36,7 @@ public class ItemPickup : MonoBehaviour {
             foreach (var entity in _dialogFilter)
             {
                 ref var dialogComponent = ref _dialogPool.Get(entity);
-                dialogComponent.DialogItem.InputText = "Похоже на лампочку " +
+                dialogComponent.InputText = "Похоже на лампочку " +
                                                        "<Открылась возможность использовать предмет в отдельном меню>";
                 dialogComponent.DialogSystem.StartDialog();
             }
@@ -52,7 +52,7 @@ public class ItemPickup : MonoBehaviour {
             foreach (var entity in _dialogFilter)
             {
                 ref var dialogComponent = ref _dialogPool.Get(entity);
-                dialogComponent.DialogItem.InputText = "Похоже на термометр " +
+                dialogComponent.InputText = "Похоже на термометр " +
                                                        "<Открылась возможность использовать термометр>";
                 dialogComponent.DialogSystem.StartDialog();
             }
@@ -68,7 +68,7 @@ public class ItemPickup : MonoBehaviour {
             foreach (var entity in _dialogFilter)
             {
                 ref var dialogComponent = ref _dialogPool.Get(entity);
-                dialogComponent.DialogItem.InputText = "Это магнит " +
+                dialogComponent.InputText = "Это магнит " +
                                                        "<Открылась возможность использовать магнит>";
                 dialogComponent.DialogSystem.StartDialog();
             }
@@ -84,7 +84,7 @@ public class ItemPickup : MonoBehaviour {
             foreach (var entity in _dialogFilter)
             {
                 ref var dialogComponent = ref _dialogPool.Get(entity);
-                dialogComponent.DialogItem.InputText = "Странные часы " +
+                dialogComponent.InputText = "Странные часы " +
                                                        "<Открылась возможность использовать часы>";
                 dialogComponent.DialogSystem.StartDialog();
             }

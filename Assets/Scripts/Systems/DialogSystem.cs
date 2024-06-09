@@ -62,7 +62,7 @@ namespace CubeECS
             _dialogPanel.SetActive(true);
             _dialogText.text = string.Empty;
 
-            foreach (char c in _dialogComponent.DialogItem.InputText)
+            foreach (char c in _dialogComponent.InputText)
             {
                 _dialogText.text += c;
                 yield return new WaitForSeconds(_dialogComponent.TextSpeed);

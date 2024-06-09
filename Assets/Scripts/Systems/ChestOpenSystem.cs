@@ -73,7 +73,7 @@ namespace CubeECS
                 foreach (var entity in _dialogFilter.Value)
                 {
                     ref var dialogComponent = ref _dialogPool.Value.Get(entity);
-                    dialogComponent.DialogItem.InputText = chest.Success;
+                    dialogComponent.InputText = chest.Success;
                     dialogComponent.DialogSystem.StartDialog();
                 }
 
@@ -84,7 +84,7 @@ namespace CubeECS
                 foreach (var entity in _dialogFilter.Value)
                 {
                     ref var dialogComponent = ref _dialogPool.Value.Get(entity);
-                    dialogComponent.DialogItem.InputText = chest.Bad;
+                    dialogComponent.InputText = chest.Bad;
                     dialogComponent.DialogSystem.StartDialog();
                 }
             }

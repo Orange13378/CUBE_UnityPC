@@ -109,7 +109,7 @@ public class CameraZoom : MonoBehaviour
         foreach (var entity in _dialogFilter)
         {
             ref var dialogComponent = ref _dialogPool.Get(entity);
-            dialogComponent.DialogItem.InputText = "√де €?";
+            dialogComponent.InputText = "√де €?";
             dialogComponent.DialogSystem.StartDialog();
         }
     }

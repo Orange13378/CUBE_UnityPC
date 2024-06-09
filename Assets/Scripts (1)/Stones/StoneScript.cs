@@ -32,7 +32,7 @@ public class StoneScript : MonoBehaviour
         foreach (var entity in _dialogFilter)
         {
             ref var dialogComponent = ref _dialogPool.Get(entity);
-            dialogComponent.DialogItem.InputText = stoneID.text;
+            dialogComponent.InputText = stoneID.text;
             dialogComponent.DialogSystem.StartDialog();
         }
     }
@@ -42,7 +42,7 @@ public class StoneScript : MonoBehaviour
         foreach (var entity in _dialogFilter)
         {
             ref var dialogComponent = ref _dialogPool.Get(entity);
-            dialogComponent.DialogItem.InputText = stoneID.electroText;
+            dialogComponent.InputText = stoneID.electroText;
             dialogComponent.DialogSystem.StartDialog();
         }
     }
