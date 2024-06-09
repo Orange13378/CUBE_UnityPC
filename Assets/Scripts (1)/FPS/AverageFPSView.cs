@@ -15,7 +15,7 @@ namespace CubeECS
         {
             if (_averageFPSCalculator != null && _fpsDisplayText != null)
             {
-                _fpsDisplayText.text = "Average FPS: " + _averageFPSCalculator.GetAverageFPS().ToString("F2");
+                _fpsDisplayText.text = "FPS: " + _averageFPSCalculator.GetAverageFPS().ToString("F2");
             }
         }
     }
