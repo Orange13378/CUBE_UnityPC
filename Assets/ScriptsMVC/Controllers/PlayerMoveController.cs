@@ -51,9 +51,4 @@ namespace CubeMVC
             _playerModel.CurrentPosition.Value = _playerRB.position;
         }
     }
-
-    public interface IContextProvider
-    {
-        Context GetContext();
-    }
 }

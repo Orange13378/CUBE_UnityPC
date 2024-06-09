@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace CubeMVC
 {
-    public class ContextProvider : MonoBehaviour, IContextProvider
+    public class ContextProvider : MonoBehaviour
     {
         private Context _context;
 
@@ -31,7 +31,6 @@ namespace CubeMVC
                 return _context;
 
             _context = new();
-            _context.ContextOwnerGO = gameObject;
             _context.PlayerView = _playerView;
             _context.PlayerInputModel = new(); 
             _context.CameraView = _cameraView;
@@ -39,7 +38,6 @@ namespace CubeMVC
             _context.DialogModel = new(0.02f);
 
             _context.ChestModel = new();
-            _context.ChestModel.Chests = _chests;
             _context.ChestModel.Chests = _chests;
 
             _context.CubeModel = new(_player, _virtualCamera, 
